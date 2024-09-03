@@ -1,0 +1,143 @@
+---
+title: "Preliminaries"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+# Load in data...
+
+```{r}
+# Read in edges and vertices as data frames/tibbles from .csv files using the {tidyverse} package
+library(tidyverse)
+
+e <- read_csv("asoiaf-all-edges.csv", col_names = TRUE)
+head(e)
+tail(e)
+glimpse(e)
+
+library(shinyDirectoryInput)
+dir <- choose.dir()
+f <- list.files(path=dir,recursive=FALSE,ignore.case=FALSE, pattern="csv",full.names=TRUE)
+
+head(f)
+
+e <- tibble()
+for (i in f){
+  x <- read_csv(i, guess_max = 10000) # guess max set close to length of largest
+  message(paste0(nrow(x)), " records in file: ", basename(i))
+  e <- bind_rows(e, x) # combines tables together, any fields not in a particular table will be filled with NA
+}
+```
+
+# Create a graph using igraph...
+
+```{r}
+edges <- e
+
+# Load the igraph package
+library(igraph)
+
+# Use the `graph_from_data_frame()` function to create a graph from a data frame
+
+graph <- graph_from_data_frame(d = edges, directed = FALSE) # d and directed are arguments
+
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 4,
+            vertex.label.cex=0.6,
+            layout=layout_nicely)
+
+# Optionally, add the weights as attributes to the edges
+E(graph)$weight <- edges$weight
+
+# Optionally set the width of edges
+edge_width <- E(graph)$weight / max(E(graph)$weight) * 25
+
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 4,
+            vertex.label.cex=0.6,
+            edge.width = edge_width,
+            layout=layout_nicely)
+```
+
+# Filtering the dataset...
+
+```{r}
+# Pick out only Cersei
+edges <- filter(e, str_detect(Source, 'Cersei') | str_detect(Target, 'Cersei'))
+
+graph <- graph_from_data_frame(d = edges, directed = FALSE)
+
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 4,
+            vertex.label.cex=0.6,
+            layout=layout_nicely)
+
+# Pick out only Stark family
+edges <- filter(e, str_detect(Source, 'Stark|Snow') | str_detect(Target, 'Stark|Snow'))
+
+graph <- graph_from_data_frame(d = edges, directed = FALSE)
+
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 4,
+            vertex.label.cex=0.6,
+            layout=layout_nicely)
+
+# Pick out only edges with high weight
+edges <- filter(e, weight >= 40)
+
+graph <- graph_from_data_frame(d = edges, directed = FALSE)
+
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 4,
+            vertex.label.cex=0.6,
+            layout=layout_nicely)
+
+a <- as_adjacency_matrix(graph)
+head(a)
+```
+
+# Create a graph using visNetwork...
+
+```{r}
+library(visNetwork)
+```
+
+## visNetwork requires separate data frames for nodes and edges
+
+```{r}
+# As before, start with a data frame of edges and weights
+edges
+
+# From this, we create a unique list of vertices
+vertices <- data.frame(
+  id = unique(c(edges$Source,edges$Target))
+,
+  label = unique(c(edges$Source, edges$Target)) # Label to display node names
+)
+
+# Create the edges data frame with scaling of widths and changing some column names
+edges <- mutate(edges,
+  from = Source,
+  to = Target,
+  width = weight / max(weight) * 25, # Scale the width
+  label = weight, # Label the edges with their weights
+  title = paste("Weight:", weight) # Tooltip for the edges
+)
+```
+
+## use the visNetwork function to create and visualize the network
+
+```{r}
+# Create the visNetwork graph
+visNetwork(vertices, edges) %>%
+  visEdges(smooth = TRUE) %>%
+  visNodes(size = 10) %>%
+  
+  visLayout(randomSeed = 42) # Set seed for reproducible layout
+```
