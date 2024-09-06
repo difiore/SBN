@@ -16,6 +16,8 @@ head(e)
 tail(e)
 glimpse(e)
 
+# Or...
+
 library(shinyDirectoryInput)
 dir <- choose.dir()
 f <- list.files(path=dir,recursive=FALSE,ignore.case=FALSE, pattern="csv",full.names=TRUE)
@@ -28,78 +30,10 @@ for (i in f){
   message(paste0(nrow(x)), " records in file: ", basename(i))
   e <- bind_rows(e, x) # combines tables together, any fields not in a particular table will be filled with NA
 }
-```
 
-# Create a graph using igraph...
-
-```{r}
-edges <- e
-
-# Load the igraph package
-library(igraph)
-
-# Use the `graph_from_data_frame()` function to create a graph from a data frame
-
-graph <- graph_from_data_frame(d = edges, directed = FALSE) # d and directed are arguments
-
-plot.igraph(graph,
-            vertex.shape="circle",
-            vertex.size = 4,
-            vertex.label.cex=0.6,
-            layout=layout_nicely)
-
-# Optionally, add the weights as attributes to the edges
-E(graph)$weight <- edges$weight
-
-# Optionally set the width of edges
-edge_width <- E(graph)$weight / max(E(graph)$weight) * 25
-
-plot.igraph(graph,
-            vertex.shape="circle",
-            vertex.size = 4,
-            vertex.label.cex=0.6,
-            edge.width = edge_width,
-            layout=layout_nicely)
-```
-
-# Filtering the dataset...
-
-```{r}
-# Pick out only Cersei
-edges <- filter(e, str_detect(Source, 'Cersei') | str_detect(Target, 'Cersei'))
-
-graph <- graph_from_data_frame(d = edges, directed = FALSE)
-
-plot.igraph(graph,
-            vertex.shape="circle",
-            vertex.size = 4,
-            vertex.label.cex=0.6,
-            layout=layout_nicely)
-
-# Pick out only Stark family
-edges <- filter(e, str_detect(Source, 'Stark|Snow') | str_detect(Target, 'Stark|Snow'))
-
-graph <- graph_from_data_frame(d = edges, directed = FALSE)
-
-plot.igraph(graph,
-            vertex.shape="circle",
-            vertex.size = 4,
-            vertex.label.cex=0.6,
-            layout=layout_nicely)
-
-# Pick out only edges with high weight
-edges <- filter(e, weight >= 40)
-
-graph <- graph_from_data_frame(d = edges, directed = FALSE)
-
-plot.igraph(graph,
-            vertex.shape="circle",
-            vertex.size = 4,
-            vertex.label.cex=0.6,
-            layout=layout_nicely)
-
-a <- as_adjacency_matrix(graph)
-head(a)
+head(e)
+tail(e)
+glimpse(e)
 ```
 
 # Create a graph using visNetwork...
@@ -111,21 +45,37 @@ library(visNetwork)
 ## visNetwork requires separate data frames for nodes and edges
 
 ```{r}
-# As before, start with a data frame of edges and weights
-edges
+# Start with a data frame that contains edges and weights
+edges <- e
 
-# From this, we create a unique list of vertices
+# Pick out only edges with high weight...
+edges <- filter(e, weight >= 50)
+edges <- filter(edges, book == 1)
+
+# Pick out only Cersei
+# edges <- filter(e, str_detect(Source, 'Cersei') | str_detect(Target, 'Cersei'))
+
+# Pick out only Stark family
+# edges <- filter(e, str_detect(Source, 'Stark|Snow') | str_detect(Target, 'Stark|Snow'))
+```
+
+# From this, create a unique list of vertices
+
+```{r}
 vertices <- data.frame(
   id = unique(c(edges$Source,edges$Target))
 ,
   label = unique(c(edges$Source, edges$Target)) # Label to display node names
 )
+```
 
-# Create the edges data frame with scaling of widths and changing some column names
+# Create a new edges data frame with scaling of widths and changing some column names to meet visNetwork requirements
+
+```{r}
+edges <- rename(edges, from = Source, to = Target, type = Type)
+
 edges <- mutate(edges,
-  from = Source,
-  to = Target,
-  width = weight / max(weight) * 25, # Scale the width
+  width = weight / max(weight) * 20, # Scale the width
   label = weight, # Label the edges with their weights
   title = paste("Weight:", weight) # Tooltip for the edges
 )
@@ -135,9 +85,115 @@ edges <- mutate(edges,
 
 ```{r}
 # Create the visNetwork graph
-visNetwork(vertices, edges) %>%
+visNetwork(nodes = vertices, edges = edges) %>%
   visEdges(smooth = TRUE) %>%
   visNodes(size = 10) %>%
-  
   visLayout(randomSeed = 42) # Set seed for reproducible layout
+```
+
+# How many components in the graph?
+# What is the diameter of the largest component?
+# Which node has the highest degree? How high?
+# If we filter by a higher node weight (e.g., 50), how do your answers change?
+
+
+# Create the same graph using igraph...
+
+```{r}
+# Load the igraph package
+library(igraph)
+
+# Use the `graph_from_data_frame()` function to create a graph from a data frame
+graph <- graph_from_data_frame(d = edges, vertices = vertices, directed = FALSE)
+
+# show edges
+E(graph)
+E(graph)$type
+E(graph)$weight
+E(graph)$width
+
+# show vertices
+V(graph)
+V(graph)$label
+
+# Use `plot()` function to visualize
+plot.igraph(graph,
+            vertex.shape="square",
+            vertex.size = 5,
+            # edge.width = E(graph)$width, # default
+            # edge.label = E(graph)$label, # default
+            layout =  layout_with_kk(graph))
+
+# or
+l <-  layout_with_kk(graph)
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 8,
+            edge.width = 4,
+            edge.label = "",
+            layout = l)
+
+# Force-directed layouts try to get a nice-looking graph where edges are similar in length and cross each other as little as possible. They simulate the graph as a physical system.
+
+l <-  layout_with_fr(graph)
+
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 8,
+            edge.width = 4,
+            edge.label = "",
+            layout = l)
+
+as_adjacency_matrix(graph)
+as_adjacency_matrix(graph, attr = "weight")
+as_edgelist(graph, names = TRUE)
+as_adj_list(graph) # vertices adjacent to each vertex
+as_adj_edge_list(graph) # edges connected to each vertex
+
+degree(graph)
+mean(degree(graph))
+
+dd <- degree_distribution(graph)
+x <- seq(0, length(dd)-1, by = 1)
+barplot(dd, names = x, xlab = "degree", ylab = "rel freq")
+```
+
+# Plot igraph object with visNetwork directly
+
+```{r}
+visIgraph(graph)
+```
+
+# Convert igraph object to visNetwork and plot, with options
+
+```{r}
+graph <- toVisNetworkData(graph, idToLabel = TRUE)
+
+visNetwork(graph$nodes, graph$edges) %>%
+  visPhysics(solver = "forceAtlas2Based", forceAtlas2Based = list(gravitationalConstant = -30))
+
+visNetwork(graph$nodes, graph$edges) %>%
+  visPhysics(solver = "repulsion")
+
+visNetwork(graph$nodes, graph$edges) %>%
+  visOptions(highlightNearest = list(enabled = TRUE, hover = TRUE, degree = 1, hideColor = "rgba(0,0,0,0.05)")) %>%
+  visEdges(color = list(inherit = "to"))
+
+visNetwork(graph$nodes, graph$edges) %>% 
+  visOptions(manipulation = TRUE) %>%
+  visLayout(randomSeed = 123)
+```
+
+```{r}
+library(igraphdata)
+data("foodwebs")
+graph <- foodwebs$Narragan
+visIgraph(graph)
+data("USairports")
+visIgraph(USairports)
+
+deg.dist <- degree_distribution(graph, cumulative=T, mode="all")
+hist(deg.dist)
+plot( x=0:max(degree(graph)), y=1-deg.dist, pch=19, cex=1.2, col="orange", 
+      xlab="Degree", ylab="Cumulative Frequency")
 ```
