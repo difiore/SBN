@@ -1,0 +1,294 @@
+---
+title: "Preliminary Network Visualization with R"
+format: html
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+Today, we are going to do some preliminary exercises for working with network data using R and RStudio. You should use a "Quarto" or "RMarkdown" document for organizing your work and notes to get practice using that approach to doing "reproducible research". Both of these are simple text documents that allow you to mix together narrative text and code to generate formatted, dynamic output. It also allows you to easily manage notes and run code.
+
+- Use the **File -\> New File -\> Quarto Document…** command to create new Quarto documents.
+
+- Use the **Render** button to preview documents after you edit them
+
+- Use syntax to format text
+
+  -   *italics* and **bold**
+  -   superscript^2^ and subscript~2~
+  -   ~~strikethrough~~
+  -   `inline code`
+
+- Use hashtags (**\#**) to format headers for section titles. The more **#**’s, the smaller the header
+
+- Chunks of R code are included in code blocks...
+
+```{r}
+print("this is a code block")
+```
+
+# Today's Exercise
+
+## Load in a dataset
+
+We will use a slightly different version of the dataset we were working with last time: social connections among characters in the *Game of Thrones* saga, but only from book one.
+
+```{r}
+#| message: false
+# read in edges and vertices as data frames/tibbles from .csv
+# files using the {tidyverse} package
+library(tidyverse)
+```
+```{r}
+#| eval: false
+f <- file.choose()
+```
+
+```{r}
+#| echo: false
+f <- "data/asoiaf-book1-edges.csv"
+```
+
+```{r}
+#| message: false
+e <- read_csv(f, col_names = TRUE)
+head(e)
+tail(e)
+glimpse(e)
+```
+
+## Create a graph using the {visNetwork} package...
+
+We will first use the visNetwork package to do a quick visualization of the network. Start by loading in the package...
+
+```{r}
+library(visNetwork)
+```
+
+{visNetwork} requires separate data frames for nodes and edges, so we create those from our dataset...
+
+```{r}
+# we first create a data frame with edges and weights as a simple
+# copy of the dataset we have loaded in
+edges <- e
+```
+
+Because this dataset is so large, we're going to limit it to only those edges with a high weight...
+
+```{r}
+# pick out only edges with high weight
+edges <- filter(e, weight >= 50)
+```
+
+From this, we then create a list of vertices by selecting all the unique names in either the "Source" or "Target" columns...
+
+```{r}
+vertices <- data.frame(
+  id = unique(c(edges$Source,edges$Target)),
+  label = unique(c(edges$Source, edges$Target))
+  # the label argument allows us to display node names
+)
+```
+
+We then change some column names to meet some requirements for the `visNetwork()` function, e.g., we change "Source" and "Target" to "from" and "to" and we make the "Type" column start with a lowercase letter...
+
+```{r}
+edges <- rename(edges, from = Source, to = Target, type = Type)
+```
+
+We also add new columns for "width", "label", and "title" to improve our visualization...
+
+```{r}
+edges <- mutate(edges,
+  width = weight / max(weight) * 20, # scale the width
+  label = weight, # label the edges with their weights
+  title = paste("Weight:", weight) # tooltip for the edges
+)
+```
+
+Now, we use the `visNetwork()` function to create and visualize the network... LOOK, this creates an interactive graph where we can select and move vertices around!
+
+```{r}
+# create the visNetwork graph
+visNetwork(nodes = vertices, edges = edges) %>%
+  visEdges(smooth = TRUE) %>%
+  visNodes(size = 10) %>%
+  # set a seed for reproducible layout
+  visLayout(randomSeed = 42)
+```
+
+### Questions
+
+Looking at this graph, answer the following questions...
+
+- How many **components** are in the graph?
+- What is the **diameter** of the largest component?
+- Which node has the **highest degree**? What is that degree?
+- If we initially filter our dataset by a higher node weight (e.g., 50), how do these answers change?
+
+## Create the same graph using the {igraph} package...
+
+```{r}
+#| message: false
+# Load the igraph package
+library(igraph)
+
+# use the `graph_from_data_frame()` function to create a graph from
+# our data frames of edges and vertices
+graph <- graph_from_data_frame(
+  d = edges,
+  vertices = vertices,
+  directed = FALSE)
+graph
+```
+
+We can use the {igraph} functions `E()` and `V()` to get information about the edges and vertices of a graph...
+
+```{r}
+# show edge information
+E(graph)
+E(graph)$type
+E(graph)$weight
+E(graph)$width
+
+# show vertex information
+V(graph)
+V(graph)$label
+```
+
+Use the `plot.igraph()` function to visualize a graph...
+
+```{r}
+plot.igraph(graph,
+            vertex.shape="square",
+            vertex.size = 5,
+            layout =  layout_nicely(graph))
+```
+
+{igraph} includes the option to use various "force-directed" layout algorithms for constructing nice-looking graphs, where edges are similar in length and cross each other as little as possible
+
+They work by simulating the graph as a physical system
+
+```{r}
+l <-  layout_with_kk(graph)
+plot.igraph(graph,
+            vertex.shape="square",
+            vertex.size = 5,
+            layout = l)
+
+plot.igraph(graph,
+            vertex.shape="circle",
+            vertex.size = 8,
+            edge.width = 4,
+            edge.label = "",
+            layout = l)
+```
+
+## Some other useful {igraph} functions
+
+Other functions from {igraph} can be run to show alternative representations of the graph properties or to return graph properties...
+
+```{r}
+#| message: false
+am <- as_adjacency_matrix(graph)
+head(am)
+am <- as_adjacency_matrix(graph, attr = "weight")
+head(am)
+el <- as_edgelist(graph, names = TRUE)
+head(el)
+al <- as_adj_list(graph) # lists vertices adjacent to each vertex
+head(al)
+ael <- as_adj_edge_list(graph) # lists edges connected to each vertex
+head(ael)
+
+degree(graph) # returns degree for each node
+mean(degree(graph))
+geo_d <- distances(graph)
+# calculates geodesic distance between vertices using weights
+head(geo_d)
+geo_d <- distances(graph, algorithm = "unweighted")
+# calculates geodesic distance between vertices ignoring weights
+head(geo_d)
+mean_distance( # uses weights
+  graph,
+  unconnected = TRUE,
+  details = FALSE
+)
+```
+
+## Calculate and plot the degree distribution...
+
+```{r}
+dd <- degree_distribution(graph)
+x <- seq(0, length(dd)-1, by = 1)
+barplot(dd, names = x, xlab = "degree", ylab = "rel freq")
+```
+
+## Write out an {igraph} data to a file...
+
+```{r}
+write_csv(as_long_data_frame(graph), file = "~/Desktop/got.csv")
+```
+
+# Other cool things to explore
+
+## Plot an {igraph} object with {visNetwork} directly
+
+```{r}
+visIgraph(graph)
+# graph is an {igraph} object...
+# visIgraph() is a function from {visNetwork}
+```
+
+## Convert an {igraph} object to a {visNetwork} object
+
+```{r}
+graph <- toVisNetworkData(graph, idToLabel = TRUE)
+```
+
+## {visNetwork} options
+
+Below are some examples of interesting {visNetwork} options for tweaking graph layouts (by editing the *physics* of layout positioning) and for interacting with a graph...
+
+```{r}
+visNetwork(graph$nodes, graph$edges) %>%
+  visPhysics(
+    solver = "forceAtlas2Based",
+    forceAtlas2Based = list(gravitationalConstant = -30)
+    )
+
+visNetwork(graph$nodes, graph$edges) %>%
+  visPhysics(solver = "repulsion")
+
+visNetwork(graph$nodes, graph$edges) %>%
+  visOptions(
+    highlightNearest = list(
+      enabled = TRUE,
+      hover = TRUE,
+      degree = 1,
+      hideColor = "rgba(0,0,0,0.05)")
+    ) %>%
+  visEdges(color = list(inherit = "to"))
+
+visNetwork(graph$nodes, graph$edges) %>% 
+  visOptions(manipulation = TRUE) %>%
+  visLayout(randomSeed = 123)
+```
+
+# Visualizing and working with other datasets from the package {igraphdata}
+
+```{r}
+#| message: false
+library(igraphdata)
+data("foodwebs") # list containing multiple {igraph} objects
+graph <- foodwebs$Narragan
+visIgraph(graph)
+
+data("USairports") # a single {igraph} object
+graph <- USairports
+visIgraph(USairports)
+```
+
+### Questions
+- Calculate the mean degree and plot the degree distribution for each of the new networks graphed above
