@@ -1,32 +1,55 @@
 ---
 title: "Preliminary Network Visualization with R"
-format: html
+format:
+  html:
+    embed-resources: true
 editor_options: 
   chunk_output_type: console
 ---
+
+# Learning Outcomes
+
+-   Understanding Quarto and RMarkdown documents
+-   Understanding functions and arguments
+-   Loading a data set: `read_csv()`
+-   Peeking at a data set: `head()`, `tail()`, `glimpse()`
+-   Wrangling data frames with {tidyverse} commands: `filter()`, `rename()`
+-   Creating a data frame from scratch with field names: `data.frame()`
+-   Running functions from {visNetwork} and {igraph} and adjusting argument values: `visNetwork()`, `graph_from_data_frame()`, `E()`, `V()`
+-   Writing out as a .csv or .graphml file
 
 # Introduction
 
 Today, we are going to do some preliminary exercises for working with network data using R and RStudio. You should use a "Quarto" or "RMarkdown" document for organizing your work and notes to get practice using that approach to doing "reproducible research". Both of these are simple text documents that allow you to mix together narrative text and code to generate formatted, dynamic output. It also allows you to easily manage notes and run code.
 
-- Use the **File -\> New File -\> Quarto Document…** command to create new Quarto documents.
+## Quarto/RMarkdown and R Basics
 
-- Use the **Render** button to preview documents after you edit them
+-   Use the **File \> New File \> Quarto Document…** or **File \> New File \> R Markdown…** command to create new Quarto or R Markdown documents.
 
-- Use syntax to format text
+-   Use hashtags (**\#**) to format headers for section titles. The more **\#**’s, the smaller the header.
 
-  -   *italics* and **bold**
-  -   superscript^2^ and subscript~2~
-  -   ~~strikethrough~~
-  -   `inline code`
+-   Use syntax to format text
 
-- Use hashtags (**\#**) to format headers for section titles. The more **#**’s, the smaller the header
+    -   Wrap text in asterisks (e.g., \*italics\*) to create *italicized* text
+    -   Wrap text in double asterisks (e.g., \*\*bold\*\*) to create **bold** text
+    -   Wrap text in carats (e.g., \^superscript\^) to create ^superscript^ text
+    -   Wrap text in tildes (e.g., \~subscript\~\^) to create ~subscript~ text
+    -   Wrap text in double tildes (e.g., \~\~strikethrough\~\~) to create ~~strikethrough~~ text
+    -   Wrap text in back ticks (e.g., \`inline code\`) to create `inline code`
 
-- Chunks of R code are included in code blocks...
+-   Chunks of R code are included in code blocks that start and end with three back ticks. The opening line of the code block should also include the designator \{r\}, which tells the rendering engine to run the code using R (as opposed to Python, etc.)
 
 ```{r}
 print("this is a code block")
 ```
+
+-   Run code by highlighting it in your document and hitting `command-RETURN` or `command-ENTER`. This sends the code to the R console and executes it.
+
+-   A whole block of code can be run by clicking the green right arrow at the top of the code block
+
+-   Comments can be included within R code blocks by prefacing them with \#
+
+-   Use the **Render** (for Quarto documents) or **Knit** (for RMarkdown documents) to create nicely formatted reports based on your notes and code. These commands read through your text file and create an HTML or PDF file that incorporates your syntax, runs the code in your code blocks, and inserts the output of running that code into the report.
 
 # Today's Exercise
 
@@ -40,6 +63,7 @@ We will use a slightly different version of the dataset we were working with las
 # files using the {tidyverse} package
 library(tidyverse)
 ```
+
 ```{r}
 #| eval: false
 f <- file.choose()
@@ -81,7 +105,7 @@ Because this dataset is so large, we're going to limit it to only those edges wi
 edges <- filter(e, weight >= 50)
 ```
 
-From this, we then create a list of vertices by selecting all the unique names in either the "Source" or "Target" columns...
+From this, we then create a data frame of vertices by selecting all the unique names in either the "Source" or "Target" columns...
 
 ```{r}
 vertices <- data.frame(
@@ -107,7 +131,7 @@ edges <- mutate(edges,
 )
 ```
 
-Now, we use the `visNetwork()` function to create and visualize the network... LOOK, this creates an interactive graph where we can select and move vertices around!
+Now, we use the `visNetwork()` function to create and visualize the network... Note that this creates an interactive graph where we can select and move vertices around!
 
 ```{r}
 # create the visNetwork graph
@@ -122,10 +146,10 @@ visNetwork(nodes = vertices, edges = edges) %>%
 
 Looking at this graph, answer the following questions...
 
-- How many **components** are in the graph?
-- What is the **diameter** of the largest component?
-- Which node has the **highest degree**? What is that degree?
-- If we initially filter our dataset by a higher node weight (e.g., 50), how do these answers change?
+-   How many **components** are in the graph?
+-   What is the **diameter** of the largest component?
+-   Which node(s) has the **highest degree**? What is that degree?
+-   If we initially filter our dataset by a higher edge weight (e.g., 60), how do these answers change? What about using a lower edge weight (e.g., 40)?
 
 ## Create the same graph using the {igraph} package...
 
@@ -160,29 +184,34 @@ V(graph)$label
 Use the `plot.igraph()` function to visualize a graph...
 
 ```{r}
-plot.igraph(graph,
-            vertex.shape="square",
-            vertex.size = 5,
-            layout =  layout_nicely(graph))
-```
-
-{igraph} includes the option to use various "force-directed" layout algorithms for constructing nice-looking graphs, where edges are similar in length and cross each other as little as possible
-
-They work by simulating the graph as a physical system
-
-```{r}
-l <-  layout_with_kk(graph)
+l <- layout_in_circle(graph)
 plot.igraph(graph,
             vertex.shape="square",
             vertex.size = 5,
             layout = l)
+# circle layouts are common, but not always visually informative!
+```
+
+{igraph} includes the option to use various "force-directed" layout algorithms for constructing nicer-looking graphs, where the edges are similar in length and cross each other as little as possible
+
+They work by simulating the graph as a physical system
+
+```{r}
+l <- layout_with_kk(graph)
+plot.igraph(graph,
+            vertex.shape="square",
+            vertex.size = 5,
+            edge.label = "",
+            layout = l)
+# here, edge widths are determined by the "width" variable we defined above,
+# and edge labels are set to be blank
 
 plot.igraph(graph,
             vertex.shape="circle",
             vertex.size = 8,
             edge.width = 4,
-            edge.label = "",
             layout = l)
+# here, we set a single edge widths, and edge labels come from the "weight" variable
 ```
 
 ## Some other useful {igraph} functions
@@ -191,25 +220,40 @@ Other functions from {igraph} can be run to show alternative representations of 
 
 ```{r}
 #| message: false
+# show adjacency matrix representation
 am <- as_adjacency_matrix(graph)
 head(am)
+
+# show adjacency matrix with weights
 am <- as_adjacency_matrix(graph, attr = "weight")
 head(am)
+
+# show edge list
 el <- as_edgelist(graph, names = TRUE)
 head(el)
-al <- as_adj_list(graph) # lists vertices adjacent to each vertex
+
+# list vertices adjacent to each vertex
+al <- as_adj_list(graph)
 head(al)
-ael <- as_adj_edge_list(graph) # lists edges connected to each vertex
+
+# list edges connected to each vertex
+ael <- as_adj_edge_list(graph) 
 head(ael)
 
-degree(graph) # returns degree for each node
-mean(degree(graph))
+# calculate the degree of each vertex
+degree(graph)
+mean(degree(graph)) # average degree
+
+# calculate geodesic distance between all pairs ofvertices using weights
 geo_d <- distances(graph)
-# calculates geodesic distance between vertices using weights
 head(geo_d)
+
+# calculate unweighted geodesic distance between pairs of
+# vertices, ignoring weights
 geo_d <- distances(graph, algorithm = "unweighted")
-# calculates geodesic distance between vertices ignoring weights
 head(geo_d)
+
+# average distance between pairs of vertices
 mean_distance( # uses weights
   graph,
   unconnected = TRUE,
@@ -221,6 +265,8 @@ mean_distance( # uses weights
 
 ```{r}
 dd <- degree_distribution(graph)
+
+# the following two lines plot the degree distribution
 x <- seq(0, length(dd)-1, by = 1)
 barplot(dd, names = x, xlab = "degree", ylab = "rel freq")
 ```
@@ -228,7 +274,11 @@ barplot(dd, names = x, xlab = "degree", ylab = "rel freq")
 ## Write out an {igraph} data to a file...
 
 ```{r}
+# in .csv format
 write_csv(as_long_data_frame(graph), file = "~/Desktop/got.csv")
+
+# in .graphml format
+write_graph(graph, file = "~/Desktop/got.graphml", format = c("graphml"))
 ```
 
 # Other cool things to explore
@@ -237,7 +287,7 @@ write_csv(as_long_data_frame(graph), file = "~/Desktop/got.csv")
 
 ```{r}
 visIgraph(graph)
-# graph is an {igraph} object...
+# here, graph is an {igraph} object, and
 # visIgraph() is a function from {visNetwork}
 ```
 
@@ -249,7 +299,7 @@ graph <- toVisNetworkData(graph, idToLabel = TRUE)
 
 ## {visNetwork} options
 
-Below are some examples of interesting {visNetwork} options for tweaking graph layouts (by editing the *physics* of layout positioning) and for interacting with a graph...
+Below are some examples of interesting {visNetwork} options for tweaking graph layouts (e.g., by editing the *physics* of layout positioning) and for interacting with a graph...
 
 ```{r}
 visNetwork(graph$nodes, graph$edges) %>%
@@ -291,4 +341,5 @@ visIgraph(USairports)
 ```
 
 ### Questions
-- Calculate the mean degree and plot the degree distribution for each of the new networks graphed above
+
+-   Calculate the mean degree and plot the degree distribution for each of the new networks graphed above
