@@ -1,0 +1,1161 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <!-- Created by SocNetV 3.1 -->
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance "       xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns       http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="node" attr.name="label" attr.type="string"> 
+    <default></default> 
+  </key> 
+  <key id="d1" for="node" attr.name="x_coordinate" attr.type="double"> 
+    <default>0.0</default> 
+  </key> 
+  <key id="d2" for="node" attr.name="y_coordinate" attr.type="double"> 
+    <default>0.0</default> 
+  </key> 
+  <key id="d3" for="node" attr.name="size" attr.type="double"> 
+    <default>10</default> 
+  </key> 
+  <key id="d4" for="node" attr.name="color" attr.type="string"> 
+    <default>red</default> 
+  </key> 
+  <key id="d5" for="node" attr.name="shape" attr.type="string"> 
+    <default>circle</default> 
+  </key> 
+  <key id="d6" for="node" attr.name="label.color" attr.type="string"> 
+    <default>#8d8d8d</default> 
+  </key> 
+  <key id="d7" for="node" attr.name="label.size" attr.type="string"> 
+    <default>8</default> 
+  </key> 
+  <key id="d8" for="edge" attr.name="weight" attr.type="double"> 
+    <default>1.0</default> 
+  </key> 
+  <key id="d9" for="edge" attr.name="color" attr.type="string"> 
+    <default>#666666</default> 
+  </key> 
+  <key id="d10" for="edge" attr.name="label" attr.type="string"> 
+    <default></default> 
+  </key> 
+  <graph id="asoiaf-book1-edges.txt" edgedefault="directed"> 
+    <node id="1"> 
+      <data key="d0">Addam-Marbrand</data>
+      <data key="d1">0.730519</data>
+      <data key="d2">0.817577</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="2"> 
+      <data key="d0">Jaime-Lannister</data>
+      <data key="d1">0.974026</data>
+      <data key="d2">0.65779</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="3"> 
+      <data key="d0">Tywin-Lannister</data>
+      <data key="d1">0.743506</data>
+      <data key="d2">0.141145</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="4"> 
+      <data key="d0">Aegon-I-Targaryen</data>
+      <data key="d1">0.325758</data>
+      <data key="d2">0.524634</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="5"> 
+      <data key="d0">Daenerys-Targaryen</data>
+      <data key="d1">0.839827</data>
+      <data key="d2">0.40213</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="6"> 
+      <data key="d0">Eddard-Stark</data>
+      <data key="d1">0.149351</data>
+      <data key="d2">0.86285</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="7"> 
+      <data key="d0">Aemon-Targaryen-(Maester-Aemon)</data>
+      <data key="d1">0.538961</data>
+      <data key="d2">0.387483</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="8"> 
+      <data key="d0">Alliser-Thorne</data>
+      <data key="d1">0.344156</data>
+      <data key="d2">0.496671</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="9"> 
+      <data key="d0">Bowen-Marsh</data>
+      <data key="d1">0.158009</data>
+      <data key="d2">0.268975</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="10"> 
+      <data key="d0">Chett</data>
+      <data key="d1">0.279221</data>
+      <data key="d2">0.422104</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="11"> 
+      <data key="d0">Clydas</data>
+      <data key="d1">0.136364</data>
+      <data key="d2">0.0612517</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="12"> 
+      <data key="d0">Jeor-Mormont</data>
+      <data key="d1">0.520563</data>
+      <data key="d2">0.933422</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="13"> 
+      <data key="d0">Jon-Snow</data>
+      <data key="d1">0.869048</data>
+      <data key="d2">0.881491</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="14"> 
+      <data key="d0">Samwell-Tarly</data>
+      <data key="d1">0.676407</data>
+      <data key="d2">0.952064</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="15"> 
+      <data key="d0">Aerys-II-Targaryen</data>
+      <data key="d1">0.404762</data>
+      <data key="d2">0.774967</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="16"> 
+      <data key="d0">Brandon-Stark</data>
+      <data key="d1">0.569264</data>
+      <data key="d2">0.133156</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="17"> 
+      <data key="d0">Gerold-Hightower</data>
+      <data key="d1">0.237013</data>
+      <data key="d2">0.651132</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="18"> 
+      <data key="d0">Jon-Arryn</data>
+      <data key="d1">0.674242</data>
+      <data key="d2">0.414115</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="19"> 
+      <data key="d0">Robert-Baratheon</data>
+      <data key="d1">0.977273</data>
+      <data key="d2">0.814913</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="20"> 
+      <data key="d0">Aggo</data>
+      <data key="d1">0.634199</data>
+      <data key="d2">0.838881</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="21"> 
+      <data key="d0">Drogo</data>
+      <data key="d1">0.965368</data>
+      <data key="d2">0.850866</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="22"> 
+      <data key="d0">Jhogo</data>
+      <data key="d1">0.91342</data>
+      <data key="d2">0.87217</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="23"> 
+      <data key="d0">Jorah-Mormont</data>
+      <data key="d1">0.637446</data>
+      <data key="d2">0.749667</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="24"> 
+      <data key="d0">Quaro</data>
+      <data key="d1">0.00541126</data>
+      <data key="d2">0.0213049</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="25"> 
+      <data key="d0">Rakharo</data>
+      <data key="d1">0.972944</data>
+      <data key="d2">0.612517</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="26"> 
+      <data key="d0">Albett</data>
+      <data key="d1">0.468615</data>
+      <data key="d2">0.813582</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="27"> 
+      <data key="d0">Halder</data>
+      <data key="d1">0.764069</data>
+      <data key="d2">0.513981</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="28"> 
+      <data key="d0">Rast</data>
+      <data key="d1">0.940476</data>
+      <data key="d2">0.821571</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="29"> 
+      <data key="d0">Grenn</data>
+      <data key="d1">0.919913</data>
+      <data key="d2">0.52996</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="30"> 
+      <data key="d0">Pypar</data>
+      <data key="d1">0.0378788</data>
+      <data key="d2">0.10253</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="31"> 
+      <data key="d0">Tyrion-Lannister</data>
+      <data key="d1">0.170996</data>
+      <data key="d2">0.527297</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="32"> 
+      <data key="d0">Alyn</data>
+      <data key="d1">0.133117</data>
+      <data key="d2">0.49534</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="33"> 
+      <data key="d0">Harwin</data>
+      <data key="d1">0.412338</data>
+      <data key="d2">0.479361</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="34"> 
+      <data key="d0">Jory-Cassel</data>
+      <data key="d1">0.816017</data>
+      <data key="d2">0.593875</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="35"> 
+      <data key="d0">Tomard</data>
+      <data key="d1">0.463203</data>
+      <data key="d2">0.516644</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="36"> 
+      <data key="d0">Arthur-Dayne</data>
+      <data key="d1">0.205628</data>
+      <data key="d2">0.371505</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="37"> 
+      <data key="d0">Arya-Stark</data>
+      <data key="d1">0.590909</data>
+      <data key="d2">0.406125</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="38"> 
+      <data key="d0">Benjen-Stark</data>
+      <data key="d1">0.11039</data>
+      <data key="d2">0.414115</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="39"> 
+      <data key="d0">Bran-Stark</data>
+      <data key="d1">0.252165</data>
+      <data key="d2">0.432756</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="40"> 
+      <data key="d0">Catelyn-Stark</data>
+      <data key="d1">0.19697</data>
+      <data key="d2">0.894807</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="41"> 
+      <data key="d0">Cersei-Lannister</data>
+      <data key="d1">0.012987</data>
+      <data key="d2">0.378162</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="42"> 
+      <data key="d0">Desmond</data>
+      <data key="d1">0.757576</data>
+      <data key="d2">0.844208</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="43"> 
+      <data key="d0">Ilyn-Payne</data>
+      <data key="d1">0.106061</data>
+      <data key="d2">0.117177</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="44"> 
+      <data key="d0">Jeyne-Poole</data>
+      <data key="d1">0.021645</data>
+      <data key="d2">0.964048</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="45"> 
+      <data key="d0">Joffrey-Baratheon</data>
+      <data key="d1">0.82684</data>
+      <data key="d2">0.151798</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="46"> 
+      <data key="d0">Meryn-Trant</data>
+      <data key="d1">0.0974026</data>
+      <data key="d2">0.50466</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="47"> 
+      <data key="d0">Mordane</data>
+      <data key="d1">0.442641</data>
+      <data key="d2">0.155792</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="48"> 
+      <data key="d0">Mycah</data>
+      <data key="d1">0.166667</data>
+      <data key="d2">0.183755</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="49"> 
+      <data key="d0">Myrcella-Baratheon</data>
+      <data key="d1">0.668831</data>
+      <data key="d2">0.458056</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="50"> 
+      <data key="d0">Petyr-Baelish</data>
+      <data key="d1">0.450216</data>
+      <data key="d2">0.874834</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="51"> 
+      <data key="d0">Rickon-Stark</data>
+      <data key="d1">0.474026</data>
+      <data key="d2">0.472703</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="52"> 
+      <data key="d0">Robb-Stark</data>
+      <data key="d1">0.900433</data>
+      <data key="d2">0.762983</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="53"> 
+      <data key="d0">Rodrik-Cassel</data>
+      <data key="d1">0.0162338</data>
+      <data key="d2">0.142477</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="54"> 
+      <data key="d0">Sandor-Clegane</data>
+      <data key="d1">0.938312</data>
+      <data key="d2">0.0865513</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="55"> 
+      <data key="d0">Sansa-Stark</data>
+      <data key="d1">0.787879</data>
+      <data key="d2">0.358189</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="56"> 
+      <data key="d0">Syrio-Forel</data>
+      <data key="d1">0.0757576</data>
+      <data key="d2">0.0186418</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="57"> 
+      <data key="d0">Tommen-Baratheon</data>
+      <data key="d1">0.124459</data>
+      <data key="d2">0.363515</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="58"> 
+      <data key="d0">Vayon-Poole</data>
+      <data key="d1">0.41342</data>
+      <data key="d2">0.575233</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="59"> 
+      <data key="d0">Yoren</data>
+      <data key="d1">0.88961</data>
+      <data key="d2">0.390146</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="60"> 
+      <data key="d0">Arys-Oakheart</data>
+      <data key="d1">0.770563</data>
+      <data key="d2">0.713715</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="61"> 
+      <data key="d0">Balon-Greyjoy</data>
+      <data key="d1">0.339827</data>
+      <data key="d2">0.537949</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="62"> 
+      <data key="d0">Balon-Swann</data>
+      <data key="d1">0.272727</data>
+      <data key="d2">0.12783</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="63"> 
+      <data key="d0">Renly-Baratheon</data>
+      <data key="d1">0.445887</data>
+      <data key="d2">0.621838</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="64"> 
+      <data key="d0">Barristan-Selmy</data>
+      <data key="d1">0.238095</data>
+      <data key="d2">0.315579</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="65"> 
+      <data key="d0">Boros-Blount</data>
+      <data key="d1">0.330087</data>
+      <data key="d2">0.491345</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="66"> 
+      <data key="d0">Pycelle</data>
+      <data key="d1">0.709957</data>
+      <data key="d2">0.110519</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="67"> 
+      <data key="d0">Varys</data>
+      <data key="d1">0.352814</data>
+      <data key="d2">0.370173</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="68"> 
+      <data key="d0">Jaremy-Rykker</data>
+      <data key="d1">0.670996</data>
+      <data key="d2">0.00266312</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="69"> 
+      <data key="d0">Luwin</data>
+      <data key="d1">0.568182</data>
+      <data key="d2">0.527297</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="70"> 
+      <data key="d0">Mance-Rayder</data>
+      <data key="d1">0.527056</data>
+      <data key="d2">0.231691</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="71"> 
+      <data key="d0">Theon-Greyjoy</data>
+      <data key="d1">0.53355</data>
+      <data key="d2">0.454061</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="72"> 
+      <data key="d0">Waymar-Royce</data>
+      <data key="d1">0.237013</data>
+      <data key="d2">0.852197</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="73"> 
+      <data key="d0">Beric-Dondarrion</data>
+      <data key="d1">0.838745</data>
+      <data key="d2">0.203728</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="74"> 
+      <data key="d0">Gregor-Clegane</data>
+      <data key="d1">0.0281385</data>
+      <data key="d2">0.76032</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="75"> 
+      <data key="d0">Loras-Tyrell</data>
+      <data key="d1">0.286797</data>
+      <data key="d2">0.818908</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="76"> 
+      <data key="d0">Thoros-of-Myr</data>
+      <data key="d1">0.181818</data>
+      <data key="d2">0.953395</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="77"> 
+      <data key="d0">Hali</data>
+      <data key="d1">0.67316</data>
+      <data key="d2">0.406125</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="78"> 
+      <data key="d0">Hallis-Mollen</data>
+      <data key="d1">0.481602</data>
+      <data key="d2">0.499334</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="79"> 
+      <data key="d0">Hodor</data>
+      <data key="d1">0.87987</data>
+      <data key="d2">0.587217</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="80"> 
+      <data key="d0">Hullen</data>
+      <data key="d1">0.132035</data>
+      <data key="d2">0.882823</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="81"> 
+      <data key="d0">Joseth</data>
+      <data key="d1">0.0941558</data>
+      <data key="d2">0.171771</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="82"> 
+      <data key="d0">Nan</data>
+      <data key="d1">0.255411</data>
+      <data key="d2">0.647137</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="83"> 
+      <data key="d0">Osha</data>
+      <data key="d1">0.82684</data>
+      <data key="d2">0.989348</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="84"> 
+      <data key="d0">Rickard-Karstark</data>
+      <data key="d1">0.670996</data>
+      <data key="d2">0.568575</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="85"> 
+      <data key="d0">Rickard-Stark</data>
+      <data key="d1">0.477273</data>
+      <data key="d2">0.750999</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="86"> 
+      <data key="d0">Stiv</data>
+      <data key="d1">0.0974026</data>
+      <data key="d2">0.892144</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="87"> 
+      <data key="d0">Lyanna-Stark</data>
+      <data key="d1">0.965368</data>
+      <data key="d2">0.617843</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="88"> 
+      <data key="d0">Bronn</data>
+      <data key="d1">0.0573593</data>
+      <data key="d2">0.0998668</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="89"> 
+      <data key="d0">Chiggen</data>
+      <data key="d1">0.0378788</data>
+      <data key="d2">0.703063</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="90"> 
+      <data key="d0">Marillion</data>
+      <data key="d1">0.698052</data>
+      <data key="d2">0.36751</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="91"> 
+      <data key="d0">Shae</data>
+      <data key="d1">0.705628</data>
+      <data key="d2">0.447403</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="92"> 
+      <data key="d0">Shagga</data>
+      <data key="d1">0.796537</data>
+      <data key="d2">0.407457</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="93"> 
+      <data key="d0">Vardis-Egen</data>
+      <data key="d1">0.497835</data>
+      <data key="d2">0.945406</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="94"> 
+      <data key="d0">Willis-Wode</data>
+      <data key="d1">0.0876623</data>
+      <data key="d2">0.213049</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="95"> 
+      <data key="d0">Brynden-Tully</data>
+      <data key="d1">0.004329</data>
+      <data key="d2">0.916112</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="96"> 
+      <data key="d0">Edmure-Tully</data>
+      <data key="d1">0.358225</data>
+      <data key="d2">0.260985</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="97"> 
+      <data key="d0">Hoster-Tully</data>
+      <data key="d1">0.75</data>
+      <data key="d2">0.846871</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="98"> 
+      <data key="d0">Lysa-Arryn</data>
+      <data key="d1">0.256494</data>
+      <data key="d2">0.972037</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="99"> 
+      <data key="d0">Nestor-Royce</data>
+      <data key="d1">0.311688</data>
+      <data key="d2">0.462051</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="100"> 
+      <data key="d0">Walder-Frey</data>
+      <data key="d1">0.339827</data>
+      <data key="d2">0.258322</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="101"> 
+      <data key="d0">Colemon</data>
+      <data key="d1">0.646104</data>
+      <data key="d2">0.845539</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="102"> 
+      <data key="d0">Donnel-Waynwood</data>
+      <data key="d1">0.501082</data>
+      <data key="d2">0.870839</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="103"> 
+      <data key="d0">Eon-Hunter</data>
+      <data key="d1">0.16342</data>
+      <data key="d2">0.685752</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="104"> 
+      <data key="d0">Jon-Umber-(Greatjon)</data>
+      <data key="d1">0.218615</data>
+      <data key="d2">0.88016</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="105"> 
+      <data key="d0">Masha-Heddle</data>
+      <data key="d1">0.604978</data>
+      <data key="d2">0.673768</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="106"> 
+      <data key="d0">Moreo-Tumitis</data>
+      <data key="d1">0.954545</data>
+      <data key="d2">0.581891</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="107"> 
+      <data key="d0">Mya-Stone</data>
+      <data key="d1">0.0735931</data>
+      <data key="d2">0.458056</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="108"> 
+      <data key="d0">Mychel-Redfort</data>
+      <data key="d1">0.142857</data>
+      <data key="d2">0.129161</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="109"> 
+      <data key="d0">Robert-Arryn</data>
+      <data key="d1">0.279221</data>
+      <data key="d2">0.616511</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="110"> 
+      <data key="d0">Stevron-Frey</data>
+      <data key="d1">0.495671</data>
+      <data key="d2">0.416778</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="111"> 
+      <data key="d0">Tytos-Blackwood</data>
+      <data key="d1">0.469697</data>
+      <data key="d2">0.105193</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="112"> 
+      <data key="d0">Wendel-Manderly</data>
+      <data key="d1">0.556277</data>
+      <data key="d2">0.0319574</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="113"> 
+      <data key="d0">Cayn</data>
+      <data key="d1">0.189394</data>
+      <data key="d2">0.356858</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="114"> 
+      <data key="d0">Janos-Slynt</data>
+      <data key="d1">0.0854978</data>
+      <data key="d2">0.796272</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="115"> 
+      <data key="d0">Stannis-Baratheon</data>
+      <data key="d1">0.208874</data>
+      <data key="d2">0.637816</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="116"> 
+      <data key="d0">Chella</data>
+      <data key="d1">0.805195</data>
+      <data key="d2">0.383489</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="117"> 
+      <data key="d0">Clement-Piper</data>
+      <data key="d1">0.806277</data>
+      <data key="d2">0.0918775</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="118"> 
+      <data key="d0">Karyl-Vance</data>
+      <data key="d1">0.683983</data>
+      <data key="d2">0.95739</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="119"> 
+      <data key="d0">Cohollo</data>
+      <data key="d1">0.198052</data>
+      <data key="d2">0.262317</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="120"> 
+      <data key="d0">Haggo</data>
+      <data key="d1">0.970779</data>
+      <data key="d2">0.294274</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="121"> 
+      <data key="d0">Qotho</data>
+      <data key="d1">0.577922</data>
+      <data key="d2">0.316911</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="122"> 
+      <data key="d0">Conn</data>
+      <data key="d1">0.858225</data>
+      <data key="d2">0.691079</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="123"> 
+      <data key="d0">Coratt</data>
+      <data key="d1">0.979437</data>
+      <data key="d2">0.150466</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="124"> 
+      <data key="d0">Doreah</data>
+      <data key="d1">0.247835</data>
+      <data key="d2">0.948069</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="125"> 
+      <data key="d0">Eroeh</data>
+      <data key="d1">0.0530303</data>
+      <data key="d2">0.41012</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="126"> 
+      <data key="d0">Illyrio-Mopatis</data>
+      <data key="d1">0.568182</data>
+      <data key="d2">0.135819</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="127"> 
+      <data key="d0">Irri</data>
+      <data key="d1">0.268398</data>
+      <data key="d2">0.930759</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="128"> 
+      <data key="d0">Jhiqui</data>
+      <data key="d1">0.661255</data>
+      <data key="d2">0.203728</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="129"> 
+      <data key="d0">Mirri-Maz-Duur</data>
+      <data key="d1">0.581169</data>
+      <data key="d2">0.202397</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="130"> 
+      <data key="d0">Rhaegar-Targaryen</data>
+      <data key="d1">0.556277</data>
+      <data key="d2">0.454061</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="131"> 
+      <data key="d0">Viserys-Targaryen</data>
+      <data key="d1">0.712121</data>
+      <data key="d2">0.856192</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="132"> 
+      <data key="d0">Danwell-Frey</data>
+      <data key="d1">0.0530303</data>
+      <data key="d2">0.596538</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="133"> 
+      <data key="d0">Hosteen-Frey</data>
+      <data key="d1">0.337662</data>
+      <data key="d2">0.688415</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="134"> 
+      <data key="d0">Jared-Frey</data>
+      <data key="d1">0.345238</data>
+      <data key="d2">0.809587</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="135"> 
+      <data key="d0">Dareon</data>
+      <data key="d1">0.898268</data>
+      <data key="d2">0.800266</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="136"> 
+      <data key="d0">Daryn-Hornwood</data>
+      <data key="d1">0.704545</data>
+      <data key="d2">0.764314</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="137"> 
+      <data key="d0">Torrhen-Karstark</data>
+      <data key="d1">0.348485</data>
+      <data key="d2">0.0359521</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="138"> 
+      <data key="d0">Dolf</data>
+      <data key="d1">0.981602</data>
+      <data key="d2">0.30759</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="139"> 
+      <data key="d0">Donal-Noye</data>
+      <data key="d1">0.863636</data>
+      <data key="d2">0.532623</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="140"> 
+      <data key="d0">Jommo</data>
+      <data key="d1">0.705628</data>
+      <data key="d2">0.695073</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="141"> 
+      <data key="d0">Ogo</data>
+      <data key="d1">0.677489</data>
+      <data key="d2">0.877497</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="142"> 
+      <data key="d0">Rhaego</data>
+      <data key="d1">0.683983</data>
+      <data key="d2">0.0359521</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="143"> 
+      <data key="d0">Dywen</data>
+      <data key="d1">0.984848</data>
+      <data key="d2">0.411451</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="144"> 
+      <data key="d0">Galbart-Glover</data>
+      <data key="d1">0.589827</data>
+      <data key="d2">0.147803</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="145"> 
+      <data key="d0">Gendry</data>
+      <data key="d1">0.767316</data>
+      <data key="d2">0.331558</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="146"> 
+      <data key="d0">High-Septon-(fat_one)</data>
+      <data key="d1">0.619048</data>
+      <data key="d2">0.406125</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="147"> 
+      <data key="d0">Howland-Reed</data>
+      <data key="d1">0.989177</data>
+      <data key="d2">0.0292943</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="148"> 
+      <data key="d0">Jacks</data>
+      <data key="d1">0.799784</data>
+      <data key="d2">0.52996</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="149"> 
+      <data key="d0">Joss</data>
+      <data key="d1">0.825758</data>
+      <data key="d2">0.186418</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="150"> 
+      <data key="d0">Marq-Piper</data>
+      <data key="d1">0.985931</data>
+      <data key="d2">0.161119</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="151"> 
+      <data key="d0">Porther</data>
+      <data key="d1">0.253247</data>
+      <data key="d2">0.691079</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="152"> 
+      <data key="d0">Raymun-Darry</data>
+      <data key="d1">0.603896</data>
+      <data key="d2">0.688415</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="153"> 
+      <data key="d0">Tobho-Mott</data>
+      <data key="d1">0.0790043</data>
+      <data key="d2">0.202397</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="154"> 
+      <data key="d0">Tregar</data>
+      <data key="d1">0.655844</data>
+      <data key="d2">0.949401</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="155"> 
+      <data key="d0">Varly</data>
+      <data key="d1">0.904762</data>
+      <data key="d2">0.467377</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="156"> 
+      <data key="d0">Wyl-(guard)</data>
+      <data key="d1">0.916667</data>
+      <data key="d2">0.624501</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="157"> 
+      <data key="d0">Wylla</data>
+      <data key="d1">0.0681818</data>
+      <data key="d2">0.824234</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="158"> 
+      <data key="d0">Fogo</data>
+      <data key="d1">0.517316</data>
+      <data key="d2">0.563249</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="159"> 
+      <data key="d0">Roose-Bolton</data>
+      <data key="d1">0.835498</data>
+      <data key="d2">0.00266312</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="160"> 
+      <data key="d0">Gared</data>
+      <data key="d1">0.371212</data>
+      <data key="d2">0.155792</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="161"> 
+      <data key="d0">Will-(prologue)</data>
+      <data key="d1">0.465368</data>
+      <data key="d2">0.673768</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="162"> 
+      <data key="d0">Oswell-Whent</data>
+      <data key="d1">0.102814</data>
+      <data key="d2">0.676431</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="163"> 
+      <data key="d0">Todder</data>
+      <data key="d1">0.176407</data>
+      <data key="d2">0.88016</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="164"> 
+      <data key="d0">Gunthor-son-of-Gurn</data>
+      <data key="d1">0.507576</data>
+      <data key="d2">0.424767</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="165"> 
+      <data key="d0">Harys-Swyft</data>
+      <data key="d1">0.140693</data>
+      <data key="d2">0.866844</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="166"> 
+      <data key="d0">Heward</data>
+      <data key="d1">0.104978</data>
+      <data key="d2">0.541944</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="167"> 
+      <data key="d0">Hobb</data>
+      <data key="d1">0.700216</data>
+      <data key="d2">0.729694</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="168"> 
+      <data key="d0">Hugh</data>
+      <data key="d1">0.288961</data>
+      <data key="d2">0.993342</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="169"> 
+      <data key="d0">Jafer-Flowers</data>
+      <data key="d1">0.747835</data>
+      <data key="d2">0.490013</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="170"> 
+      <data key="d0">Kevan-Lannister</data>
+      <data key="d1">0.0541126</data>
+      <data key="d2">0.38482</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="171"> 
+      <data key="d0">Matthar</data>
+      <data key="d1">0.340909</data>
+      <data key="d2">0.466045</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="172"> 
+      <data key="d0">Othor</data>
+      <data key="d1">0.564935</data>
+      <data key="d2">0.306258</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="173"> 
+      <data key="d0">Maege-Mormont</data>
+      <data key="d1">0.225108</data>
+      <data key="d2">0.981358</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="174"> 
+      <data key="d0">Jonos-Bracken</data>
+      <data key="d1">0.260823</data>
+      <data key="d2">0.318242</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="175"> 
+      <data key="d0">Jyck</data>
+      <data key="d1">0.162338</data>
+      <data key="d2">0.47004</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="176"> 
+      <data key="d0">Morrec</data>
+      <data key="d1">0.428571</data>
+      <data key="d2">0.655126</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="177"> 
+      <data key="d0">Kurleket</data>
+      <data key="d1">0.232684</data>
+      <data key="d2">0.559254</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="178"> 
+      <data key="d0">Lancel-Lannister</data>
+      <data key="d1">0.0746753</data>
+      <data key="d2">0.498003</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="179"> 
+      <data key="d0">Leo-Lefford</data>
+      <data key="d1">0.937229</data>
+      <data key="d2">0.378162</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="180"> 
+      <data key="d0">Mace-Tyrell</data>
+      <data key="d1">0.285714</data>
+      <data key="d2">0.725699</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="181"> 
+      <data key="d0">Lyn-Corbray</data>
+      <data key="d1">0.746753</data>
+      <data key="d2">0.0639148</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="182"> 
+      <data key="d0">Paxter-Redwyne</data>
+      <data key="d1">0.151515</data>
+      <data key="d2">0.3249</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="183"> 
+      <data key="d0">Maegor-I-Targaryen</data>
+      <data key="d1">0.340909</data>
+      <data key="d2">0.878828</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="184"> 
+      <data key="d0">Mord</data>
+      <data key="d1">0.266234</data>
+      <data key="d2">0.962716</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="185"> 
+      <data key="d0">Randyll-Tarly</data>
+      <data key="d1">0.306277</data>
+      <data key="d2">0.581891</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="186"> 
+      <data key="d0">Timett</data>
+      <data key="d1">0.875541</data>
+      <data key="d2">0.575233</data>
+      <data key="d5">circle</data>
+    </node>
+    <node id="187"> 
+      <data key="d0">Ulf-son-of-Umar</data>
+      <data key="d1">0.849567</data>
+      <data key="d2">0.88016</data>
+      <data key="d5">circle</data>
+    </node>
+  </graph>
+</graphml>
