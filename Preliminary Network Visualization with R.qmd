@@ -102,7 +102,7 @@ Because this dataset is so large, we're going to limit it to only those edges wi
 
 ```{r}
 # pick out only edges with high weight
-edges <- filter(e, weight >= 50)
+edges <- filter(edges, weight >= 50)
 ```
 
 From this, we then create a data frame of vertices by selecting all the unique names in either the "Source" or "Target" columns...
@@ -137,7 +137,7 @@ Now, we use the `visNetwork()` function to create and visualize the network... N
 # create the visNetwork graph
 visNetwork(nodes = vertices, edges = edges) %>%
   visEdges(smooth = TRUE) %>%
-  visNodes(size = 10) %>%
+  visNodes(size = 20) %>%
   # set a seed for reproducible layout
   visLayout(randomSeed = 42)
 ```
@@ -343,3 +343,113 @@ visIgraph(USairports)
 ### Questions
 
 -   Calculate the mean degree and plot the degree distribution for each of the new networks graphed above
+
+# Centrality Measures
+
+Let's go back to the Game of Thrones graph in igraph format...
+
+```{r}
+graph <- graph_from_data_frame(
+  d = edges,
+  vertices = vertices,
+  directed = FALSE)
+
+# we can plot this directly with {visNetwork} and can event call igraph layout routines...
+visIgraph(graph) %>%
+  visIgraphLayout(layout = "layout_with_kk") %>%
+  visLayout(randomSeed = 42)
+```
+
+Now, we calculate several standard **node-level metrics of centrality**, which are common ways of characterizing the importance of different nodes in the network.
+
+```{r}
+degree <- degree(graph)
+
+bw_weighted <- betweenness( # with edges weighted...
+  graph,
+  directed = FALSE
+)
+
+E(graph)$weight <- 1
+
+bw_unweighted <- betweenness( # with edges set to a uniform weight
+  graph,
+  directed = FALSE
+)
+
+eigen <- eigen_centrality(graph)$vector
+
+hub <- hub_score(graph)$vector
+
+authority <- authority_score(graph)$vector
+
+closeness <- closeness(graph)
+
+# reach at different numbers of steps from "ego"
+# note that `ego_size(graph, 1) - 1` is equivalent to degree!
+# below, we scale reach by the number of nodes
+# this is a measure of how many possible links ego could have
+# note that in both the number and denominator, we subtract 1 to remove ego itself
+reach_1 <- (ego_size(graph, 1) - 1)/(vcount(graph)-1)
+
+reach_2 <- (ego_size(graph, 2) - 1)/(vcount(graph)-1)
+
+reach_3 <- (ego_size(graph, 3) - 1)/(vcount(graph)-1)
+```
+
+Now, we put all these measures together in a data frame and add a "shape" variable for visualization in {visNetwork}
+
+```{r}
+centralities <- data.frame(id = names(degree), label = names(degree), degree, bw_weighted, bw_unweighted, eigen, hub, authority, closeness, reach_1, reach_2, reach_3, shape = "dot")
+
+rownames(centralities) <- NULL
+
+l <- layout_with_kk(graph)
+
+plot.igraph(graph, layout=l, 
+            vertex.size=degree(graph) * 3,
+            main="Degree")
+
+plot.igraph(graph, layout=l, 
+            vertex.size=eigen_centrality(graph)$vector * 15,
+            main="Eigen")
+
+plot.igraph(graph, layout=l, 
+            vertex.size=closeness * 50,
+            main="Closeness")
+
+plot.igraph(graph, layout=l, 
+            vertex.size=hub_score(graph)$vector * 15,
+            main="Hubs")
+
+plot.igraph(graph, layout=l, 
+            vertex.size=betweenness(graph) *3,
+            main="Betweeness")
+
+graph <- graph_from_data_frame(
+  d = edges,
+  vertices = centralities,
+  directed = FALSE)
+
+size_var <- "bw_weighted"
+
+centralities <- mutate(centralities, value = centralities[[size_var]])
+
+visNetwork(nodes = centralities, edges = edges) %>%
+  visIgraphLayout(layout = "layout_with_kk") %>%
+  visLayout(randomSeed = 42)
+```
+
+To calculate transitivity, another network level metric, we need the {statnet} package, which combines several other packages for network analysis, including {sna} and {network}
+
+We first convert our igraph object to a network object using the package {intergraph}
+
+```{r}
+library(intergraph)
+library(statnet)
+network <- asNetwork(graph)
+# we can plot network objects from within the {network} package
+plot.network(network)
+transitivity <- gtrans(network)
+```
+
