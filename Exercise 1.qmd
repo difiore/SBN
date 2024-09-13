@@ -1,0 +1,87 @@
+---
+title: "Exercise 1 - Network Visualization"
+format:
+  html:
+    embed-resources: true
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+You are going to practice your skills as loading social network data, extracting several network-level metrics to describe the network's structure, and calculating several node-level metrics of "importance" or "centrality".
+
+The dataset we will work with comes from this GitHub site: [Harry Potter Character Network](https://github.com/efekarakus/potter-network)
+
+Go to that site, move into the "data" folder, and download the two .csv files "characters.csv" and "relations.csv".
+
+## Create a Quarto or RMarkdown Document
+
+Create a new Quarto or RMarkdown document with code and descriptive text in which you do the following...
+
+## Load in Dataset
+
+Read the files you downloaded into R using the {tidyverse} package as two data frames, "v" (for vertices) and "e" for edges.
+
+```{r}
+#| message: false
+library(tidyverse)
+v <- read_csv("characters.csv", col_names = TRUE)
+e <- read_csv("relations.csv", col_names = TRUE)
+```
+
+We need to do some manipulations to wrangle the data to make graph objects and visualize it...
+
+```{r}
+#| message: false
+edges <- left_join(e, v, by = c("source" = "id"))
+edges <- select(edges, -c(source, bio))
+edges <- rename(edges, from = name)
+edges <- left_join(edges, v, by = c("target" = "id"))
+edges <- select(edges, -c(target, bio))
+edges <- rename(edges, to = name)
+edges <- rename(edges, relationship = type)
+edges <- select(edges, from, to, relationship)
+edges <- mutate(edges, type = "undirected")
+edges <- filter(edges, from != to)
+
+vertices <- data.frame(
+  id = unique(c(v$name)),
+  label = unique(c(v$name))
+)
+
+library(igraph)
+g <- graph_from_data_frame(
+  d = filter(edges, relationship == "+"),
+  vertices = vertices,
+  directed = FALSE)
+g
+```
+
+## Challenges
+
+- Make a graph object representing the POSITIVE relationships among the set of characters
+  - What is the size of the graph?
+  - How many components are in the graph?
+  - What is the graph density?
+  - What is the graph diameter?
+  - What is the graph transitivity?
+  - Be sure you can convert the graph to an adjacency matrix
+  
+- Make a preliminary visualization of the graph using your favorite R package
+
+```{r}
+#| message: false
+plot.igraph(g)
+library(visNetwork)
+visIgraph(g) %>%
+  visLayout(randomSeed = 42)
+```
+
+- Calculate the degree of each vertex in the graph. Who has the highest degree?
+
+- Calculate betweenness and closeness centrality for each vertex of the graph. Based on these values, which individuals are most important in the network?
+
+- Redraw your graph scaling each vertex's size to its betweenness and see if you can figure out how to make the vertices appear as GREEN SQUARES and color the edges BLUE
+
