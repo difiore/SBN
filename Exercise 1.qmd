@@ -20,9 +20,11 @@ Go to that site, move into the "data" folder, and download the two .csv files "c
 
 Create a new Quarto or RMarkdown document with code and descriptive text in which you do the following...
 
-## Load in Dataset
+## Load in and Clean Up the Dataset
 
 Read the files you downloaded into R using the {tidyverse} package as two data frames, "v" (for vertices) and "e" for edges.
+
+> NOTE: In the code snippet below, I have hard-coded the path to the two data files... in the Quarto/RMarkdown document you will turn in to me, you should do the same, but for loading the data interactively you could replace "characters.csv" or "relations.csv" with `file.choose()`, which would then open up a dialog box and allow you to select a file. HOWEVER, that will not work when you go to render the document to make a pretty PDF report.
 
 ```{r}
 #| message: false
@@ -31,26 +33,36 @@ v <- read_csv("characters.csv", col_names = TRUE)
 e <- read_csv("relations.csv", col_names = TRUE)
 ```
 
-We need to do some manipulations to wrangle the data to make graph objects and visualize it...
+We now need to do some manipulations to wrangle the data get it into the format we are used to in order to make a graph object and be able to visualize it.
+
+We first create a data frame of edges...
 
 ```{r}
 #| message: false
-edges <- left_join(e, v, by = c("source" = "id"))
-edges <- select(edges, -c(source, bio))
-edges <- rename(edges, from = name)
-edges <- left_join(edges, v, by = c("target" = "id"))
-edges <- select(edges, -c(target, bio))
-edges <- rename(edges, to = name)
-edges <- rename(edges, relationship = type)
-edges <- select(edges, from, to, relationship)
-edges <- mutate(edges, type = "undirected")
-edges <- filter(edges, from != to)
+edges <- left_join(e, v, by = c("source" = "id")) # merge info from e and v
+edges <- select(edges, -c(source, bio)) # drop the "source" and "bio" columns
+edges <- rename(edges, from = name) # rename "name" as "from"
+edges <- left_join(edges, v, by = c("target" = "id")) # merge info from edges and v
+edges <- select(edges, -c(target, bio)) # drop the "target" and "bio" columns
+edges <- rename(edges, to = name) # rename "name" as "to"
+edges <- rename(edges, relationship = type) # rename the "type" column
+edges <- select(edges, c("from", "to", "relationship")) # reorder the columns
+edges <- mutate(edges, type = "undirected") # add a new "type" column specifying that edges are undirected
+edges <- filter(edges, from != to) # remove the few cases where "from" and "to" are identical
+```
 
+We then create a data frame of vertices...
+
+```{r}
 vertices <- data.frame(
   id = unique(c(v$name)),
   label = unique(c(v$name))
 )
+```
 
+We can now create a graph object in {igraph}...
+
+```{r}
 library(igraph)
 g <- graph_from_data_frame(
   d = filter(edges, relationship == "+"),
