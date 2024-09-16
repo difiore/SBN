@@ -1,0 +1,69 @@
+---
+title: "Simpsons"
+format: html
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+#| message: false
+library(tidyverse)
+v <- read_csv("simpsonsNodes.csv", col_names = TRUE)
+e <- read_csv("simpsonsEdges.csv", col_names = TRUE)
+# merge info from e and v
+edges <- left_join(e, v, by = c("Source" = "Id"))
+# drop the "source" and "bio" columns
+edges <- select(edges, -c(Source))
+# rename "name" as "from"
+edges <- rename(edges, from = char_name)
+# merge info from edges and v
+edges <- left_join(edges, v, by = c("Target" = "Id"))
+# drop the "target" and "bio" columns
+edges <- select(edges, -c(Target))
+# rename "name" as "to"
+edges <- rename(edges, to = char_name)
+# rename the "type" column
+edges <- rename(edges, type = Type, weight = Weight)
+# reorder the columns
+edges <- select(edges, c("from", "to", "type", "weight"))
+
+edges <- filter(edges, weight > 100)
+
+vertices <- data.frame(
+  id = unique(c(edges$from, edges$to)),
+  label = unique(c(edges$from, edges$to))
+)
+
+library(igraph)
+graph <- graph_from_data_frame(
+  d = edges,
+  vertices = vertices,
+  directed = FALSE)
+graph
+graph <- simplify(graph, remove.loops = TRUE, remove.multiple = TRUE) 
+library(visNetwork)
+visIgraph(graph, randomSeed = 42) %>%
+  visIgraphLayout(layout = "layout_with_kk")
+
+b <- igraph::betweenness(graph)
+V(graph)$size <- b * 2
+plot.igraph(graph)
+
+library(intergraph)
+network <- asNetwork(graph)
+
+library(statnet)
+rescale <- function(variable, low, high) {
+  min_d <- min(variable)
+  max_d <- max(variable)
+  rescaled <- ((high-low) * (variable - min_d)) / (max_d-min_d) + low
+  return(rescaled)
+}
+
+plot.network(network,
+             vertex.cex = rescale(size, 1, 6))
+
+visIgraph(graph, randomSeed = 42) %>%
+  visIgraphLayout(layout = "layout_with_fr")
+```

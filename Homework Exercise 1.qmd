@@ -188,7 +188,7 @@ Which three characters have the highest degrees?
 ```{r}
 #| code-fold: true
 #| eval: false
-d <- igraph::degree(graph)
+d <- degree(graph)
 sort(d, decreasing = TRUE)[1:3]
 ```
 
