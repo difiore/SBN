@@ -1,0 +1,268 @@
+---
+title: "Homework Exercise 1"
+subtitle: "Network Calculations and Visualizations"
+format:
+  html:
+    embed-resources: true
+    code-overflow: wrap
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-summary: "Code hint"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Introduction
+
+You are going to practice your skills as loading social network data, extracting several network-level metrics to describe the network's structure, and calculating several node-level metrics of "importance" or "centrality".
+
+The dataset we will work with comes from this GitHub site: [Harry Potter Character Network](https://github.com/efekarakus/potter-network).
+
+Go to that site, move into the "data" folder, and download the two .csv files "characters.csv" and "relations.csv".
+
+## Create a Quarto or RMarkdown Document
+
+Create a new Quarto or RMarkdown document with code and descriptive text in which you do the following...
+
+## Load and Clean Up the Dataset
+
+Read the files you downloaded into R using the {tidyverse} package as two data frames, "v" (for vertices) and "e" for edges.
+
+> **NOTE:** In the code snippet below, I have hard-coded the path to the two data files... in the Quarto/RMarkdown document you will eventually turn in to me, you should do the same, which means you will need to insert the path to the location on your computer where these files are located. If they are located in the same directory in which you started R, then the code below should work fine, but if they are in a different directory, e.g., your Documents or My Documents or Downloads folder, you will need to preface the file name with the path to the directory.
+
+> For selecting a file to load interactively you could replace "characters.csv" or "relations.csv" with `file.choose()`, which would then open up a standard dialog box. HOWEVER, that will not work when you go to render the document to make a pretty PDF report, that approach does not work because rendering will stop if your code requires feedback from the user.
+
+```{r}
+#| message: false
+library(tidyverse)
+v <- read_csv("characters.csv", col_names = TRUE)
+e <- read_csv("relations.csv", col_names = TRUE)
+```
+
+We now need to do some manipulations to wrangle the data get it into the format we are used to in order to make a graph object and be able to visualize it.
+
+We first create a data frame of edges...
+
+```{r}
+#| message: false
+# merge info from e and v
+edges <- left_join(e, v, by = c("source" = "id"))
+# drop the "source" and "bio" columns
+edges <- select(edges, -c(source, bio))
+# rename "name" as "from"
+edges <- rename(edges, from = name)
+# merge info from edges and v
+edges <- left_join(edges, v, by = c("target" = "id"))
+# drop the "target" and "bio" columns
+edges <- select(edges, -c(target, bio))
+# rename "name" as "to"
+edges <- rename(edges, to = name)
+# rename the "type" column
+edges <- rename(edges, relationship = type)
+# reorder the columns
+edges <- select(edges, c("from", "to", "relationship"))
+# add a new "type" column specifying that edges are undirected
+edges <- mutate(edges, type = "undirected")
+```
+
+We then create a data frame of vertices...
+
+```{r}
+vertices <- data.frame(
+  id = unique(c(v$name)),
+  label = unique(c(v$name))
+)
+```
+
+We can now create a graph object in {igraph}...
+
+```{r}
+#| message: false
+library(igraph)
+graph <- graph_from_data_frame(
+  d = filter(edges, relationship == "+"),
+  vertices = vertices,
+  directed = FALSE)
+graph
+```
+
+We can run the `simplify()` function from {igraph} to remove loops (edges from a vertex to itself) and multiple edges (where the same edge is specified more than once) from the graph. This particular Harry Potter dataset is noisy and has some of each of those types of edges!
+
+```{r}
+graph <- simplify(graph, remove.loops = TRUE, remove.multiple = TRUE) 
+```
+
+## Challenges
+
+In your Quarto/RMarkdown document, create new code blocks to do each of the following manipulations/analyses with your graph. I have provided some code hints for you, but I encourage you to NOT look at those, unless you are stuck!
+
+##### Make a preliminary visualization of the graph
+
+```{r}
+#| message: false
+#| code-fold: true
+#| eval: false
+plot.igraph(graph)
+
+# or
+
+library(visNetwork)
+visIgraph(graph) %>%
+  visLayout(randomSeed = 42)
+```
+
+##### What is the ***size*** of the graph?
+
+```{r}
+#| code-fold: true
+#| eval: false
+length(V(graph))
+```
+
+##### What is the graph ***density***?
+
+> **HINT:** Look at the function `edge_density()` from {igraph}.
+
+```{r}
+#| code-fold: true
+#| eval: false
+edge_density(graph)
+```
+
+##### What is the graph ***diameter***?
+
+```{r}
+#| code-fold: true
+#| eval: false
+diameter(graph, weights = NA)
+```
+
+##### Which two vertices are ***farthest apart***?
+
+> **HINT:** Look at the function `farthest_vertices()` from {igraph}.
+
+```{r}
+#| code-fold: true
+#| eval: false
+farthest_vertices(graph)
+```
+
+##### What is the graph's ***transitivity***?
+
+To do this, you will first need to convert your {igraph} object to a {network} object. You can do this by installing and then loading the {intergraph} package and using the function `asNetwork()`.
+
+Then, you will then need to install and load the {statnet} package, which imports functions from two additional useful packages for network analysis, {sna} and {network}. The {sna} package includes a function called `gtrans()`, which can be used to calculate transitivity.
+
+```{r}
+#| message: false
+#| echo: false
+library(intergraph)
+library(statnet)
+```
+
+```{r}
+#| message: false
+#| code-fold: true
+#| eval: false
+library(intergraph)
+library(statnet)
+network <- asNetwork(graph) # asNetwork() comes from the {intergraph} package
+gtrans(network, mode = "graph") # gtrans() comes from the {sna} package, loaded with {statnet}
+```
+
+> **NOTE:** Loading {statnet} (and thus {sna} and {network}), as we did above, results in some {igraph} functions being "masked" because these the {sna} package include a few functions with exactly the same names as {igraph} functions! To use {igraph} functions again after {sna} has been loaded, we need to preface them with `igraph::` to make it clear that we want to use the {igraph} version of the function.
+
+> Alternatively, we could unload {sna} after calculating transitivity by running `detach(package:sna)` before trying to run an {igraph} function again.
+
+> Also, note that we can, at any time, preface a function call with the name of the package that it comes from and `::` to run that function without having to load it into our R environment with `library()`!
+
+##### How many ***components*** are in the graph?
+
+```{r}
+#| code-fold: true
+#| eval: false
+igraph::components(graph)$no # prefixing the function with `igraph::` ensures that the {igraph} version of this function is used
+
+# or
+# sna::components(network) # prefixing the function with `sna::` calls the {sna} version of this function specifically
+```
+
+##### Convert the graph to an ***adjacency matrix*** and print out the first 10 lines of that matrix
+
+```{r}
+#| message: false
+#| eval: false
+#| code-fold: true
+am <- as_adjacency_matrix(graph)
+head(am, 10)
+```
+
+##### Calculate the ***degree*** of each vertex in the graph
+
+Which three characters have the highest degrees?
+
+> **HINT:** Use the `sort()` function to sort the degree vector in descending order and then select the first three elements in the sorted vector.
+
+```{r}
+#| code-fold: true
+#| eval: false
+d <- igraph::degree(graph)
+sort(d, decreasing = TRUE)[1:3]
+
+# or, to get just a vector of values...
+# d <- sna::degree(network, gmode = "graph")
+```
+
+##### Calculate and plot the ***degree distribution*** of the graph
+
+```{r}
+#| code-fold: true
+#| eval: false
+hist(d) # plots a histogram
+
+# or, construct your own histogram...
+
+d <- degree_distribution(graph)
+x <- seq(0, length(d)-1, by = 1)
+barplot(d, names = x, xlab = "degree", ylab = "rel freq")
+```
+
+##### Calculate ***betweenness*** and ***closeness*** centrality for each vertex of the graph
+
+Based on these values, which three individuals are most important in the network?
+
+```{r}
+#| code-fold: true
+#| eval: false
+b <- igraph::betweenness(graph)
+sort(b, decreasing = TRUE)[1:3]
+
+# or, to get just a vector of values...
+# b <- sna::betweenness(network, gmode = "graph", cmode = "undirected")
+
+c <- igraph::closeness(graph)
+sort(c, decreasing = TRUE)[1:3]
+```
+
+##### Tweak your visualization!!!
+
+Redraw your graph after scaling each vertex's size to the (square root of its betweenness value, + 10), and see if you can figure out how to make the vertices appear as ORANGE SQUARES, color the edges BLUE, and set the width of the edges to be 10. This will require editing the size, color, and shape attributes of the vertices and the width attribute of your graph's edges.
+
+```{r}
+#| code-fold: true
+#| eval: false
+# add attributes to vertices and edges... this is easy to do with {igraph}
+V(graph)$size <- sqrt(b) + 10
+V(graph)$color <- "orange"
+V(graph)$shape <- "square"
+E(graph)$color <- "blue"
+E(graph)$width <- 10
+
+# plot with {igraph}
+l = layout_with_fr(graph)
+plot.igraph(graph, layout = l)
+
+# or, plot with {visNetwork}
+visIgraph(graph, randomSeed = 42) %>%
+  visIgraphLayout(layout = "layout_with_fr")
+```

@@ -3,6 +3,10 @@ title: "Preliminary Network Visualization with R"
 format:
   html:
     embed-resources: true
+    code-overflow: wrap
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-summary: "Code hint"
 editor_options: 
   chunk_output_type: console
 ---
@@ -16,7 +20,7 @@ editor_options:
 -   Wrangling data frames with {tidyverse} commands: `filter()`, `rename()`
 -   Creating a data frame from scratch with field names: `data.frame()`
 -   Running functions from {visNetwork} and {igraph} and adjusting argument values: `visNetwork()`, `graph_from_data_frame()`, `E()`, `V()`
--   Writing out as a .csv or .graphml file
+-   Writing out {igraph} objects to a file, e.g., in ".csv" or ".graphml" format
 
 # Introduction
 
@@ -28,7 +32,7 @@ Today, we are going to do some preliminary exercises for working with network da
 
 -   Use hashtags (**\#**) to format headers for section titles. The more **\#**’s, the smaller the header.
 
--   Use syntax to format text
+-   Use markdown syntax to format text
 
     -   Wrap text in asterisks (e.g., \*italics\*) to create *italicized* text
     -   Wrap text in double asterisks (e.g., \*\*bold\*\*) to create **bold** text
@@ -39,7 +43,13 @@ Today, we are going to do some preliminary exercises for working with network da
 
 -   Chunks of R code are included in code blocks that start and end with three back ticks. The opening line of the code block should also include the designator \{r\}, which tells the rendering engine to run the code using R (as opposed to Python, etc.)
 
+```{{r}}
+# example code block syntax
+print("this is a code block")
+```
+
 ```{r}
+#| echo: false
 print("this is a code block")
 ```
 
@@ -59,8 +69,7 @@ We will use a slightly different version of the dataset we were working with las
 
 ```{r}
 #| message: false
-# read in edges and vertices as data frames/tibbles from .csv
-# files using the {tidyverse} package
+# read in edges and vertices as data frames/tibbles from .csv files using the {tidyverse} package
 library(tidyverse)
 ```
 
@@ -93,8 +102,7 @@ library(visNetwork)
 {visNetwork} requires separate data frames for nodes and edges, so we create those from our dataset...
 
 ```{r}
-# we first create a data frame with edges and weights as a simple
-# copy of the dataset we have loaded in
+# we first create a data frame with edges and weights as a simple copy of the dataset we have loaded in
 edges <- e
 ```
 
@@ -158,8 +166,7 @@ Looking at this graph, answer the following questions...
 # Load the igraph package
 library(igraph)
 
-# use the `graph_from_data_frame()` function to create a graph from
-# our data frames of edges and vertices
+# use the `graph_from_data_frame()` function to create a graph from our data frames of edges and vertices
 graph <- graph_from_data_frame(
   d = edges,
   vertices = vertices,
@@ -203,8 +210,7 @@ plot.igraph(graph,
             vertex.size = 5,
             edge.label = "",
             layout = l)
-# here, edge widths are determined by the "width" variable we defined above,
-# and edge labels are set to be blank
+# here, edge widths are determined by the "width" variable we defined above, and edge labels are set to be blank
 
 plot.igraph(graph,
             vertex.shape="circle",
@@ -220,27 +226,28 @@ Other functions from {igraph} can be run to show alternative representations of 
 
 ```{r}
 #| message: false
+#| warning: false
 # show adjacency matrix representation
-am <- as_adjacency_matrix(graph)
-head(am)
+m <- as_adjacency_matrix(graph)
+head(m)
 
 # show adjacency matrix with weights
-am <- as_adjacency_matrix(graph, attr = "weight")
-head(am)
+m <- as_adjacency_matrix(graph, attr = "weight")
+head(m)
 
 # show edge list
-el <- as_edgelist(graph, names = TRUE)
-head(el)
+l <- as_edgelist(graph, names = TRUE)
+head(l)
 
 # list vertices adjacent to each vertex
-al <- as_adj_list(graph)
-head(al)
+l <- as_adj_list(graph)
+head(l)
 
 # list edges connected to each vertex
-ael <- as_adj_edge_list(graph) 
-head(ael)
+l <- as_adj_edge_list(graph) 
+head(l)
 
-# calculate the degree of each vertex
+# calculate the degree of each vertex and average degree
 degree(graph)
 mean(degree(graph)) # average degree
 
@@ -248,8 +255,7 @@ mean(degree(graph)) # average degree
 geo_d <- distances(graph)
 head(geo_d)
 
-# calculate unweighted geodesic distance between pairs of
-# vertices, ignoring weights
+# calculate unweighted geodesic distance between pairs of vertices, ignoring weights
 geo_d <- distances(graph, algorithm = "unweighted")
 head(geo_d)
 
@@ -264,40 +270,39 @@ mean_distance( # uses weights
 ## Calculate and plot the degree distribution...
 
 ```{r}
-dd <- degree_distribution(graph)
+d <- degree_distribution(graph)
 
-# the following two lines plot the degree distribution
-x <- seq(0, length(dd)-1, by = 1)
-barplot(dd, names = x, xlab = "degree", ylab = "rel freq")
+# the following two lines will plot the degree distribution
+x <- seq(0, length(d)-1, by = 1)
+barplot(d, names = x, xlab = "degree", ylab = "rel freq")
 ```
 
 ## Write out an {igraph} data to a file...
 
 ```{r}
 # in .csv format
-write_csv(as_long_data_frame(graph), file = "~/Desktop/got.csv")
+write_csv(as_long_data_frame(graph), file = "got.csv")
 
 # in .graphml format
-write_graph(graph, file = "~/Desktop/got.graphml", format = c("graphml"))
+write_graph(graph, file = "got.graphml", format = c("graphml"))
 ```
 
-# Other cool things to explore
+## Other cool things to explore
 
-## Plot an {igraph} object with {visNetwork} directly
+### Plot an {igraph} object with {visNetwork} directly
 
 ```{r}
 visIgraph(graph)
-# here, graph is an {igraph} object, and
-# visIgraph() is a function from {visNetwork}
+# here, graph is an {igraph} object, and visIgraph() is a function from {visNetwork}
 ```
 
-## Convert an {igraph} object to a {visNetwork} object
+### Convert an {igraph} object to a {visNetwork} object
 
 ```{r}
 graph <- toVisNetworkData(graph, idToLabel = TRUE)
 ```
 
-## {visNetwork} options
+### {visNetwork} options
 
 Below are some examples of interesting {visNetwork} options for tweaking graph layouts (e.g., by editing the *physics* of layout positioning) and for interacting with a graph...
 
@@ -323,10 +328,10 @@ visNetwork(graph$nodes, graph$edges) %>%
 
 visNetwork(graph$nodes, graph$edges) %>% 
   visOptions(manipulation = TRUE) %>%
-  visLayout(randomSeed = 123)
+  visLayout(randomSeed = 42)
 ```
 
-# Visualizing and working with other datasets from the package {igraphdata}
+## Visualizing and working with other datasets from the package {igraphdata}
 
 ```{r}
 #| message: false
@@ -342,11 +347,11 @@ visIgraph(USairports)
 
 ### Questions
 
--   Calculate the mean degree and plot the degree distribution for each of the new networks graphed above
+-   Can you calculate the mean degree and plot the degree distribution for each of the new networks graphed above?
 
-# Centrality Measures
+## Calculating the "importance" of nodes using centrality measures
 
-Let's go back to the Game of Thrones graph in igraph format...
+Let's go back to the *Game of Thrones* graph in {igraph} format...
 
 ```{r}
 graph <- graph_from_data_frame(
@@ -354,13 +359,15 @@ graph <- graph_from_data_frame(
   vertices = vertices,
   directed = FALSE)
 
-# we can plot this directly with {visNetwork} and can event call igraph layout routines...
+# we can plot this directly with {visNetwork} and can even call igraph layout routines...
 visIgraph(graph) %>%
   visIgraphLayout(layout = "layout_with_kk") %>%
   visLayout(randomSeed = 42)
 ```
 
 Now, we calculate several standard **node-level metrics of centrality**, which are common ways of characterizing the importance of different nodes in the network.
+
+##### Degree centrality
 
 ```{r}
 degree <- degree(graph)
@@ -376,62 +383,97 @@ bw_unweighted <- betweenness( # with edges set to a uniform weight
   graph,
   directed = FALSE
 )
+```
 
+##### Eigen centrality
+
+```{r}
 eigen <- eigen_centrality(graph)$vector
+```
 
+##### Hub and authority scores
+
+```{r}
 hub <- hub_score(graph)$vector
 
 authority <- authority_score(graph)$vector
-
-closeness <- closeness(graph)
-
-# reach at different numbers of steps from "ego"
-# note that `ego_size(graph, 1) - 1` is equivalent to degree!
-# below, we scale reach by the number of nodes
-# this is a measure of how many possible links ego could have
-# note that in both the number and denominator, we subtract 1 to remove ego itself
-reach_1 <- (ego_size(graph, 1) - 1)/(vcount(graph)-1)
-
-reach_2 <- (ego_size(graph, 2) - 1)/(vcount(graph)-1)
-
-reach_3 <- (ego_size(graph, 3) - 1)/(vcount(graph)-1)
 ```
 
-Now, we put all these measures together in a data frame and add a "shape" variable for visualization in {visNetwork}
+##### Closeness centrality
 
 ```{r}
-centralities <- data.frame(id = names(degree), label = names(degree), degree, bw_weighted, bw_unweighted, eigen, hub, authority, closeness, reach_1, reach_2, reach_3, shape = "dot")
+closeness <- closeness(graph)
+```
 
-rownames(centralities) <- NULL
+##### Reach
+
+"Reach" is calculated as the number of vertices that can be accessed from any particular vertex ("ego") within a specified numbers of steps from each that vertex, scaled by the total number of possible vertices that could be accessed
+
+The {igraph} functions, `ego_size()` or `neighborhood()`, with two arguments ("graph = graph" and "order = k"), return the number of vertices, including "ego", within a given number of steps, k, from "ego", thus `ego_size(graph, 1) - 1` is equivalent to degree!
+
+We divide this number by the total number of vertices other than "ego" in the graph to calculate reach
+
+```{r}
+# below, we scale reach by the number of vertices other than ego in the graph, which is a measure of how many possible links ego could have
+
+reach_1 <- (ego_size(graph, 1) - 1) / (vcount(graph) - 1)
+
+reach_2 <- (ego_size(graph, 2) - 1) / (vcount(graph) - 1)
+
+reach_3 <- (ego_size(graph, 3) - 1) / (vcount(graph) - 1)
+```
+
+## Customizing visualizations
+
+We can put all these measures together in a data frame and add a "shape" variable for visualization in {visNetwork}
+
+```{r}
+centralities <- data.frame(
+  id = names(degree),
+  label = names(degree),
+  degree,
+  bw_weighted,
+  bw_unweighted,
+  eigen,
+  hub,
+  authority,
+  closeness,
+  reach_1,
+  reach_2,
+  reach_3,
+  shape = "dot") # add a shape attribute so that we can scale shapes
+
+# using {igraph}
 
 l <- layout_with_kk(graph)
 
-plot.igraph(graph, layout=l, 
-            vertex.size=degree(graph) * 3,
+plot.igraph(graph,
+            layout=l, 
+            vertex.size = degree * 3,
             main="Degree")
 
-plot.igraph(graph, layout=l, 
-            vertex.size=eigen_centrality(graph)$vector * 15,
+plot.igraph(graph,
+            layout=l, 
+            vertex.size= eigen * 15,
             main="Eigen")
 
-plot.igraph(graph, layout=l, 
-            vertex.size=closeness * 50,
+plot.igraph(graph,
+            layout=l, 
+            vertex.size = closeness * 50,
             main="Closeness")
 
-plot.igraph(graph, layout=l, 
-            vertex.size=hub_score(graph)$vector * 15,
-            main="Hubs")
-
-plot.igraph(graph, layout=l, 
-            vertex.size=betweenness(graph) *3,
+plot.igraph(graph,
+            layout=l, 
+            vertex.size = bw_weighted * 2,
             main="Betweeness")
 
+# using {visNetwork}
 graph <- graph_from_data_frame(
   d = edges,
   vertices = centralities,
   directed = FALSE)
 
-size_var <- "bw_weighted"
+size_var <- "bw_weighted" # try changing which variable to plot by replacing "bw_weighted" with other measures of centrality
 
 centralities <- mutate(centralities, value = centralities[[size_var]])
 
@@ -440,16 +482,34 @@ visNetwork(nodes = centralities, edges = edges) %>%
   visLayout(randomSeed = 42)
 ```
 
-To calculate transitivity, another network level metric, we need the {statnet} package, which combines several other packages for network analysis, including {sna} and {network}
+## Transitivity
 
-We first convert our igraph object to a network object using the package {intergraph}
+To calculate transitivity, another network level metric, we need to use the {statnet} package, which combines several other packages for network analysis, including {sna} and {network}
+
+We first convert our {igraph} object to a network object using yet another network package {intergraph}....
 
 ```{r}
+#| message: false
 library(intergraph)
-library(statnet)
 network <- asNetwork(graph)
-# we can plot network objects from within the {network} package
-plot.network(network)
-transitivity <- gtrans(network)
-```
+library(statnet)
 
+# we can plot network objects from within the {statnet} package
+
+# note that the plotting code below first introduces a new function, `rescale()`, that allows the user to specify a range of values over which to rescale a variable of interest
+
+# then, the `plot.network()` function calls this new function to set vertex sizes...
+
+rescale <- function(variable, low, high) {
+  min_d <- min(variable)
+  max_d <- max(variable)
+  rescaled <- ((high-low) * (variable - min_d)) / (max_d-min_d) + low
+  return(rescaled)
+}
+
+plot.network(network,
+             vertex.cex = rescale(bw_weighted, 1, 6))
+# the `gtrans()` function then calculates transitivity across the whole graph
+transitivity <- gtrans(network)
+transitivity
+```
