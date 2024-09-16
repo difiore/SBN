@@ -3154,9 +3154,9 @@ vertical-align: -.125em;
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 5f3f98c UN-- 65 356 -- 
+<pre><code>IGRAPH c93438e UN-- 65 356 -- 
 + attr: name (v/c), label (v/c), relationship (e/c), type (e/c)
-+ edges from 5f3f98c (vertex names):
++ edges from c93438e (vertex names):
  [1] Sirius Black  --Albus Dumbledore       
  [2] Sirius Black  --Hermione Granger       
  [3] Sirius Black  --Remus Lupin            
@@ -3233,38 +3233,26 @@ vertical-align: -.125em;
 </details>
 </div>
 </section>
-<section id="what-is-the-graphs-transitivity" class="level5">
-<h5 class="anchored" data-anchor-id="what-is-the-graphs-transitivity">What is the graph’s <strong><em>transitivity</em></strong>?</h5>
-<p>To do this, you will first need to convert your {igraph} object to a {network} object. You can do this by installing and then loading the {intergraph} package and using the function <code>asNetwork()</code>.</p>
-<p>Then, you will then need to install and load the {statnet} package, which imports functions from two additional useful packages for network analysis, {sna} and {network}. The {sna} package includes a function called <code>gtrans()</code>, which can be used to calculate transitivity.</p>
+<section id="what-is-the-graphs-transitivity-or-global-clustering-coefficient-what-is-the-average-local-clustering-coefficient" class="level5">
+<h5 class="anchored" data-anchor-id="what-is-the-graphs-transitivity-or-global-clustering-coefficient-what-is-the-average-local-clustering-coefficient">What is the graph’s <strong><em>transitivity</em></strong> (or <strong><em>global clustering coefficient</em></strong>? What is the <strong><em>average local clustering coefficient</em></strong>?</h5>
+<p>Can you explain why are these different?</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code hint</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(intergraph)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statnet)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">asNetwork</span>(graph) <span class="co"># asNetwork() comes from the {intergraph} package</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">gtrans</span>(network, <span class="at">mode =</span> <span class="st">&quot;graph&quot;</span>) <span class="co"># gtrans() comes from the {sna} package, loaded with {statnet}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>g.transitivity <span class="ot">&lt;-</span> <span class="fu">transitivity</span>(graph, <span class="at">type =</span> <span class="st">&quot;global&quot;</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>g.transitivity</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>l.transitivity <span class="ot">&lt;-</span> <span class="fu">transitivity</span>(graph, <span class="at">type =</span> <span class="st">&quot;localaverage&quot;</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>l.transitivity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<blockquote class="blockquote">
-<p><strong>NOTE:</strong> Loading {statnet} (and thus {sna} and {network}), as we did above, results in some {igraph} functions being “masked” because these the {sna} package include a few functions with exactly the same names as {igraph} functions! To use {igraph} functions again after {sna} has been loaded, we need to preface them with <code>igraph::</code> to make it clear that we want to use the {igraph} version of the function.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Alternatively, we could unload {sna} after calculating transitivity by running <code>detach(package:sna)</code> before trying to run an {igraph} function again.</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>Also, note that we can, at any time, preface a function call with the name of the package that it comes from and <code>::</code> to run that function without having to load it into our R environment with <code>library()</code>!</p>
-</blockquote>
 </section>
 <section id="how-many-components-are-in-the-graph" class="level5">
 <h5 class="anchored" data-anchor-id="how-many-components-are-in-the-graph">How many <strong><em>components</em></strong> are in the graph?</h5>
 <div class="cell">
 <details class="code-fold">
 <summary>Code hint</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">components</span>(graph)<span class="sc">$</span>no <span class="co"># prefixing the function with `igraph::` ensures that the {igraph} version of this function is used</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># or</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sna::components(network) # prefixing the function with `sna::` calls the {sna} version of this function specifically</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">components</span>(graph)<span class="sc">$</span>no <span class="co"># the &quot;no&quot; slot of the object returned from running `components()` contains the number of components</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -3273,8 +3261,8 @@ vertical-align: -.125em;
 <div class="cell">
 <details class="code-fold">
 <summary>Code hint</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>am <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(graph)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(am, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">as_adjacency_matrix</span>(graph)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(m, <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -3288,10 +3276,7 @@ vertical-align: -.125em;
 <details class="code-fold">
 <summary>Code hint</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">degree</span>(graph)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(d, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># or, to get just a vector of values...</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># d &lt;- sna::degree(network, gmode = &quot;graph&quot;)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(d, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -3316,14 +3301,11 @@ vertical-align: -.125em;
 <div class="cell">
 <details class="code-fold">
 <summary>Code hint</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">betweenness</span>(graph)</span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">betweenness</span>(graph)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(b, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># or, to get just a vector of values...</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># b &lt;- sna::betweenness(network, gmode = &quot;graph&quot;, cmode = &quot;undirected&quot;)</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">closeness</span>(graph)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(c, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">closeness</span>(graph)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(c, <span class="at">decreasing =</span> <span class="cn">TRUE</span>)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -3350,6 +3332,37 @@ vertical-align: -.125em;
 </details>
 </div>
 </section>
+</section>
+<section id="some-final-notes" class="level2">
+<h2 class="anchored" data-anchor-id="some-final-notes">Some Final Notes</h2>
+<p>We could also accomplish some of the steps above by converting our {igraph} object to a {network} object using {intergraph} and then using functions from {statnet} (specifically from the {sna} package, which {statnet} loads) to do some of the calculations indicated above. For example…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(intergraph)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>network <span class="ot">&lt;-</span> <span class="fu">asNetwork</span>(graph)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statnet)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># density</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gden</span>(network)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># transitivity</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="fu">gtrans</span>(network)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># components</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="fu">components</span>(network)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># degree</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="fu">degree</span>(network, <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># {sna} version of this function returns an unamed vector of values</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># betweenness</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="fu">betweenness</span>(network, <span class="at">gmode =</span> <span class="st">&quot;graph&quot;</span>, <span class="at">cmode =</span> <span class="st">&quot;undirected&quot;</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># {sna} version of this function returns an unamed vector of values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Be aware that loading {statnet} (and thus {sna} and {network}), after {igraph} is loaded results in some {igraph} functions being “masked” because the {sna} package include a few functions with exactly the same names! To use {igraph} functions again after {sna} has been loaded, we would need to preface them with <code>igraph::</code> to make it clear that we want to use the {igraph} version of the function.</p>
+<p>Alternatively, to be sure to use {igraph} versions of the functions, we could unload {sna} by running <code>detach(package:sna)</code> before trying to run an {igraph} function again.</p>
+<blockquote class="blockquote">
+<p><strong>NOTE:</strong> We can, at any time, preface a function call with the name of the package that it comes from and <code>::</code> to run that function without having to load it into our R environment with <code>library()</code>!</p>
+</blockquote>
 </section>
 </section>
 

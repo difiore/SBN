@@ -367,11 +367,21 @@ visIgraph(graph) %>%
 
 Now, we calculate several standard **node-level metrics of centrality**, which are common ways of characterizing the importance of different nodes in the network.
 
-##### Degree centrality
+##### Degree centrality (a.k.a. node degree)
 
 ```{r}
 degree <- degree(graph)
+```
 
+##### Node strength
+
+```{r}
+strength <- strength(graph)
+```
+
+##### Betweenness
+
+```{r}
 bw_weighted <- betweenness( # with edges weighted...
   graph,
   directed = FALSE
@@ -432,6 +442,7 @@ centralities <- data.frame(
   id = names(degree),
   label = names(degree),
   degree,
+  strength,
   bw_weighted,
   bw_unweighted,
   eigen,
@@ -482,21 +493,33 @@ visNetwork(nodes = centralities, edges = edges) %>%
   visLayout(randomSeed = 42)
 ```
 
-## Transitivity
+## Transitivity or clustering coefficient
 
-To calculate transitivity, another network level metric, we need to use the {statnet} package, which combines several other packages for network analysis, including {sna} and {network}
+The {igraph} function `transitivity()` can be used to calculate various clustering coefficients
 
-We first convert our {igraph} object to a network object using yet another network package {intergraph}....
+```{r}
+transitivity(graph, type = "global")
+transitivity(graph, type = "local")
+transitivity(graph, type = "localaverage")
+```
+
+Transitivity can also be calculated by first converting an {igraph} object to a {network} object using the package {intergraph}, and then using functions bundled in the package {statnet}. To do this conversion, we first install and load the {intergraph} package and then call the conversion function `asNetwork()`...
 
 ```{r}
 #| message: false
 library(intergraph)
 network <- asNetwork(graph)
+```
+
+We then need to install and load {statnet}, which imports functions from two additional useful packages for network analysis, {sna} and {network}...
+
+```{r}
+#| message: false
 library(statnet)
 
-# we can plot network objects from within the {statnet} package
+# note that we can plot network objects from within the {statnet} package!
 
-# note that the plotting code below first introduces a new function, `rescale()`, that allows the user to specify a range of values over which to rescale a variable of interest
+# the plotting code below first introduces a new function, `rescale()`, that allows the user to specify a range of values over which to rescale a variable of interest
 
 # then, the `plot.network()` function calls this new function to set vertex sizes...
 
@@ -509,7 +532,11 @@ rescale <- function(variable, low, high) {
 
 plot.network(network,
              vertex.cex = rescale(bw_weighted, 1, 6))
-# the `gtrans()` function then calculates transitivity across the whole graph
+```
+
+The {sna} package loaded with {statnet} includes a function called `gtrans()`, which calculates global transitivity...
+
+```{r}
 transitivity <- gtrans(network)
 transitivity
 ```

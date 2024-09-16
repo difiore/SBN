@@ -147,44 +147,26 @@ diameter(graph, weights = NA)
 farthest_vertices(graph)
 ```
 
-##### What is the graph's ***transitivity***?
+##### What is the graph's ***transitivity*** (or ***global clustering coefficient***? What is the ***average local clustering coefficient***?
 
-To do this, you will first need to convert your {igraph} object to a {network} object. You can do this by installing and then loading the {intergraph} package and using the function `asNetwork()`.
-
-Then, you will then need to install and load the {statnet} package, which imports functions from two additional useful packages for network analysis, {sna} and {network}. The {sna} package includes a function called `gtrans()`, which can be used to calculate transitivity.
+Can you explain why are these different?
 
 ```{r}
-#| message: false
-#| echo: false
-library(intergraph)
-library(statnet)
-```
-
-```{r}
-#| message: false
 #| code-fold: true
 #| eval: false
-library(intergraph)
-library(statnet)
-network <- asNetwork(graph) # asNetwork() comes from the {intergraph} package
-gtrans(network, mode = "graph") # gtrans() comes from the {sna} package, loaded with {statnet}
+g.transitivity <- transitivity(graph, type = "global")
+g.transitivity
+
+l.transitivity <- transitivity(graph, type = "localaverage")
+l.transitivity
 ```
-
-> **NOTE:** Loading {statnet} (and thus {sna} and {network}), as we did above, results in some {igraph} functions being "masked" because these the {sna} package include a few functions with exactly the same names as {igraph} functions! To use {igraph} functions again after {sna} has been loaded, we need to preface them with `igraph::` to make it clear that we want to use the {igraph} version of the function.
-
-> Alternatively, we could unload {sna} after calculating transitivity by running `detach(package:sna)` before trying to run an {igraph} function again.
-
-> Also, note that we can, at any time, preface a function call with the name of the package that it comes from and `::` to run that function without having to load it into our R environment with `library()`!
 
 ##### How many ***components*** are in the graph?
 
 ```{r}
 #| code-fold: true
 #| eval: false
-igraph::components(graph)$no # prefixing the function with `igraph::` ensures that the {igraph} version of this function is used
-
-# or
-# sna::components(network) # prefixing the function with `sna::` calls the {sna} version of this function specifically
+components(graph)$no # the "no" slot of the object returned from running `components()` contains the number of components
 ```
 
 ##### Convert the graph to an ***adjacency matrix*** and print out the first 10 lines of that matrix
@@ -193,8 +175,8 @@ igraph::components(graph)$no # prefixing the function with `igraph::` ensures th
 #| message: false
 #| eval: false
 #| code-fold: true
-am <- as_adjacency_matrix(graph)
-head(am, 10)
+m <- as_adjacency_matrix(graph)
+head(m, 10)
 ```
 
 ##### Calculate the ***degree*** of each vertex in the graph
@@ -208,9 +190,6 @@ Which three characters have the highest degrees?
 #| eval: false
 d <- igraph::degree(graph)
 sort(d, decreasing = TRUE)[1:3]
-
-# or, to get just a vector of values...
-# d <- sna::degree(network, gmode = "graph")
 ```
 
 ##### Calculate and plot the ***degree distribution*** of the graph
@@ -234,13 +213,10 @@ Based on these values, which three individuals are most important in the network
 ```{r}
 #| code-fold: true
 #| eval: false
-b <- igraph::betweenness(graph)
+b <- betweenness(graph)
 sort(b, decreasing = TRUE)[1:3]
 
-# or, to get just a vector of values...
-# b <- sna::betweenness(network, gmode = "graph", cmode = "undirected")
-
-c <- igraph::closeness(graph)
+c <- closeness(graph)
 sort(c, decreasing = TRUE)[1:3]
 ```
 
@@ -266,3 +242,38 @@ plot.igraph(graph, layout = l)
 visIgraph(graph, randomSeed = 42) %>%
   visIgraphLayout(layout = "layout_with_fr")
 ```
+
+## Some Final Notes
+
+We could also accomplish some of the steps above by converting our {igraph} object to a {network} object using {intergraph} and then using functions from {statnet} (specifically from the {sna} package, which {statnet} loads) to do some of the calculations indicated above. For example...
+
+```{r}
+#| message: false
+#| eval: false
+library(intergraph)
+network <- asNetwork(graph)
+library(statnet)
+
+# density
+gden(network)
+
+# transitivity
+gtrans(network)
+
+# components
+components(network)
+
+# degree
+degree(network, gmode = "graph")
+# {sna} version of this function returns an unamed vector of values
+
+# betweenness
+betweenness(network, gmode = "graph", cmode = "undirected")
+# {sna} version of this function returns an unamed vector of values
+```
+
+Be aware that loading {statnet} (and thus {sna} and {network}), after {igraph} is loaded results in some {igraph} functions being "masked" because the {sna} package include a few functions with exactly the same names! To use {igraph} functions again after {sna} has been loaded, we would need to preface them with `igraph::` to make it clear that we want to use the {igraph} version of the function.
+
+Alternatively, to be sure to use {igraph} versions of the functions, we could unload {sna} by running `detach(package:sna)` before trying to run an {igraph} function again.
+
+> **NOTE:** We can, at any time, preface a function call with the name of the package that it comes from and `::` to run that function without having to load it into our R environment with `library()`!
