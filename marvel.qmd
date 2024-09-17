@@ -1,0 +1,38 @@
+---
+title: "Marvel"
+format:
+  html:
+    embed-resources: true
+    code-overflow: wrap
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-summary: "Code hint"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+# MCU
+library(tidyverse)
+library(igraph)
+library(visNetwork)
+v <- read_csv("data/marvel-unimodal-nodes.csv", col_names = TRUE)
+e <- read_csv("data/marvel-unimodal-edges.csv", col_names = TRUE)
+
+edges <- filter(e, Weight > 100)
+edges <- rename(edges, from = Source, to = Target, weight = Weight)
+vertices <- unique(c(edges$from, edges$to))
+
+library(igraph)
+graph <- graph_from_data_frame(
+  d = edges,
+  vertices = vertices,
+  directed = TRUE)
+graph
+
+graph <- simplify(graph, remove.loops = TRUE, remove.multiple = TRUE) 
+
+library(visNetwork)
+visIgraph(graph, randomSeed = 42) %>%
+  visIgraphLayout(layout = "layout_with_kk")
+```
