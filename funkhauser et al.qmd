@@ -22,8 +22,22 @@ e <- d + t(d)
 e <- e/2
 mean(e)
 gd <- graph_from_adjacency_matrix(d, mode = "directed", weighted = TRUE)
+gd
 gu <- graph_from_adjacency_matrix(e, mode = "undirected", weighted = TRUE)
-visIgraph(gd)
+
+gd_vis <- toVisNetworkData(gd, idToLabel = TRUE)
+
+edges <- data.frame(gd_vis$edges)
+nodes <- data.frame(gd_vis$nodes)
+edges$value <- edges$weight
+
+visNetwork(edges = edges, nodes = nodes) %>%
+  visEdges(arrows = "to", smooth = FALSE)
+
+
+visIgraph(gd) %>%
+  visEdges(width = "weight") 
+
 visIgraph(gu)
 c <- cluster_fast_greedy(gu)
 modularity(c)
@@ -34,4 +48,23 @@ eigen_centrality(gd)$vector
 reach <- (ego_size(gu, 3) - 1)/(vcount(gu) - 1)
 cluster_coef <- transitivity(gd, "local")
 plot_dendrogram(c)
+
+library(visNetwork)
+
+# Create example nodes and edges
+nodes <- data.frame(id = 1:5, 
+                    label = paste("Node", 1:5))
+
+# Create example edges with weights
+edges <- data.frame(from = c(1, 1, 2, 3, 4), 
+                    to = c(2, 3, 3, 4, 5),
+                    value = c(1, 2, 3, 4, 5))  # Use 'value' for edge weight
+
+# Create the network
+visNetwork(nodes, edges) %>%
+  visEdges(arrows = "to", 
+           smooth = FALSE) %>%
+  visOptions(highlightNearest = TRUE, 
+             nodesIdSelection = TRUE)
+
 ```
