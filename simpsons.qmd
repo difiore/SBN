@@ -32,9 +32,7 @@ edges <- rename(edges, to = char_name)
 edges <- rename(edges, type = Type, weight = Weight)
 # reorder the columns
 edges <- select(edges, c("from", "to", "type", "weight"))
-
 edges <- filter(edges, weight > 100)
-
 vertices <- data.frame(
   id = unique(c(edges$from, edges$to)),
   label = unique(c(edges$from, edges$to))
@@ -47,28 +45,28 @@ graph <- graph_from_data_frame(
   directed = FALSE)
 graph
 graph <- simplify(graph, remove.loops = TRUE, remove.multiple = TRUE) 
+V(graph)$size <- igraph::betweenness(graph) # set size in igraph to betweeness
 
+node_sizes <- V(graph)$size # create a separate vector of node sizes
+
+# plot with {igraph}
+plot.igraph(graph, vertex.size =V(graph)$size * 5)
+# or
+plot.igraph(graph, vertex.size = rescale(node_sizes, 1, 15))
+
+# plot with {visNetwork}
 library(visNetwork)
 visIgraph(graph, randomSeed = 42) %>%
   visIgraphLayout(layout = "layout_with_kk")
 
-b <- igraph::betweenness(graph)
-V(graph)$size <- b * 2
-plot.igraph(graph)
-
+# convert to network object
 library(intergraph)
 network <- asNetwork(graph)
 library(statnet)
-rescale <- function(variable, low, high) {
-  min_d <- min(variable)
-  max_d <- max(variable)
-  rescaled <- ((high-low) * (variable - min_d)) / (max_d-min_d) + low
-  return(rescaled)
-}
 
-plot.network(network,
-             vertex.cex = rescale(size, 1, 6))
+# plot with {sna}
+gplot(network, gmode = "graph", displaylabels = TRUE, vertex.cex = rescale(node_sizes, 1, 2))
 
-visIgraph(graph, randomSeed = 42) %>%
-  visIgraphLayout(layout = "layout_with_fr")
+# plot with {network}
+plot.network(network, label = network.vertex.names(network), vertex.cex = rescale(node_sizes, 1, 4))
 ```
