@@ -420,6 +420,7 @@ ggraph(graph, layout = global_layout) +
   geom_node_point(aes(size=strength),shape=21,colour="#004C99",fill="#A70042",alpha=0.8) +
   geom_node_text(aes(label=name,size=strength),colour="black",repel=T)
 
+plot <- list()
 j <- 0
 for (i in 2004:2015) {
   j <- j + 1
@@ -429,10 +430,11 @@ for (i in 2004:2015) {
     select(-season)
   g <- graph_from_data_frame(p, directed = FALSE)
   w <- data.frame(as_edgelist(g), weight=E(g)$weight)
-  V(g)$strength <- strength(g)
+  strength <- strength(g)
   v <- as_ids(V(g))
   # print(v)
   s <- induced_subgraph(graph, v)
+  V(s)$strength <- strength
   id <- filter(ids, name %in% v) %>% pull(label)
   layout <- global_layout[id,]
   plot[[j]] <- ggraph(s, layout = layout) +
@@ -457,4 +459,22 @@ for (i in 2004:2015) {
 }
 
 cowplot::plot_grid(plot[[1]],plot[[2]],plot[[3]],plot[[4]],
-                   plot[[5]],plot[[6]],plot[[7]],plot[[8]])
+                   plot[[5]],plot[[6]],plot[[7]],plot[[8]],
+                   plot[[9]],plot[[10]],plot[[11]],plot[[12]], nrow = 3)
+
+
+
+devtools::install_github("FCrSTATS/SBpitch")
+
+library(SBpitch)
+passes = wsldata %>%
+  filter(type.name=="Pass" & is.na(pass.outcome.name) &
+           player.id==4641) %>% #1
+  filter(pass.end_location.x>=102 & pass.end_location.y<=62 &
+           pass.end_location.y>=18) #2
+create_Pitch() +
+  geom_segment(data = passes, aes(x = location.x, y = location.y,
+                                  xend = pass.end_location.x, yend = pass.end_location.y), lineend = "round", size = 0.5, colour = "#000000", arrow =
+                 arrow(length = unit(0.07, "inches"), ends = "last", type = "open")) + #3 labs(title = "Fran Kirby, Completed Box Passes", subtitle = "WSL,
+  2020-21") + #4 scale_y_reverse() + #5 coord_fixed(ratio = 105/100) #6
+
