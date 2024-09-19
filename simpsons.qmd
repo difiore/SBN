@@ -12,8 +12,20 @@ editor_options:
 ---
 
 ```{r}
+# define rescale function
+rescale <- function(variable, low, high) {
+  min_d <- min(variable)
+  max_d <- max(variable)
+  rescaled <- ((high-low) * (variable - min_d)) / (max_d-min_d) + low
+  return(rescaled)
+}
+```
+
+```{r}
 #| message: false
 library(tidyverse)
+library(igraph)
+library(visNetwork)
 v <- read_csv("data/simpsonsNodes.csv", col_names = TRUE)
 e <- read_csv("data/simpsonsEdges.csv", col_names = TRUE)
 # merge info from e and v
@@ -38,7 +50,6 @@ vertices <- data.frame(
   label = unique(c(edges$from, edges$to))
 )
 
-library(igraph)
 graph <- graph_from_data_frame(
   d = edges,
   vertices = vertices,
@@ -55,7 +66,6 @@ plot.igraph(graph, vertex.size =V(graph)$size * 5)
 plot.igraph(graph, vertex.size = rescale(node_sizes, 1, 15))
 
 # plot with {visNetwork}
-library(visNetwork)
 visIgraph(graph, randomSeed = 42) %>%
   visIgraphLayout(layout = "layout_with_kk")
 

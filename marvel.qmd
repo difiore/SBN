@@ -12,7 +12,17 @@ editor_options:
 ---
 
 ```{r}
-# MCU
+# define rescale function
+rescale <- function(variable, low, high) {
+  min_d <- min(variable)
+  max_d <- max(variable)
+  rescaled <- ((high-low) * (variable - min_d)) / (max_d-min_d) + low
+  return(rescaled)
+}
+```
+
+```{r}
+#| message: false
 library(tidyverse)
 library(igraph)
 library(visNetwork)
@@ -23,16 +33,29 @@ edges <- filter(e, Weight > 100)
 edges <- rename(edges, from = Source, to = Target, weight = Weight)
 vertices <- unique(c(edges$from, edges$to))
 
-library(igraph)
 graph <- graph_from_data_frame(
   d = edges,
   vertices = vertices,
   directed = TRUE)
 graph
 
-graph <- simplify(graph, remove.loops = TRUE, remove.multiple = TRUE) 
+graph <- simplify(graph, remove.loops = TRUE, remove.multiple = TRUE)
 
-library(visNetwork)
-visIgraph(graph, randomSeed = 42) %>%
-  visIgraphLayout(layout = "layout_with_kk")
+V(graph)$size <- rescale(igraph::betweenness(graph), 10, 50) # set size in igraph to betweeness
+
+visIgraph(graph,
+          smooth = TRUE,
+          layout = "layout_with_kk",
+          randomSeed = 42)
+
+# or
+vis_graph <- toVisNetworkData(graph, idToLabel = TRUE)
+
+visNetwork(
+  vis_graph$nodes,
+  vis_graph$edges
+  ) %>%
+  visEdges(arrows ="to") %>%
+  visPhysics(solver = "forceAtlas2Based") %>%
+  visLayout(randomSeed = 42)
 ```
