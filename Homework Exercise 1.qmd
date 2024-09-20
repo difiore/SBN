@@ -35,8 +35,8 @@ Read the files you downloaded into R using the {tidyverse} package as two data f
 ```{r}
 #| message: false
 library(tidyverse)
-v <- read_csv("characters.csv", col_names = TRUE)
-e <- read_csv("relations.csv", col_names = TRUE)
+v <- read_csv("data/characters.csv", col_names = TRUE)
+e <- read_csv("data/relations.csv", col_names = TRUE)
 ```
 
 We now need to do some manipulations to wrangle the data get it into the format we are used to in order to make a graph object and be able to visualize it.

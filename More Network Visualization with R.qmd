@@ -1,0 +1,316 @@
+---
+title: "More Network Visualization with R"
+format:
+  html:
+    embed-resources: true
+    code-overflow: wrap
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-summary: "Code hint"
+editor_options: 
+  chunk_output_type: console
+---
+
+# Preliminaries
+
+Load in the packages we need for today's work...
+
+```{r}
+#| message: false
+library(igraph)
+library(intergraph)
+library(statnet)
+library(visNetwork)
+library(tidyverse)
+```
+
+# Introduction
+
+Today, we are going to learn a few additional metrics for describing network structure and examine how these compare across some simple networks. We will start by using the {igraph} `graph()` function to create some a few networks to compare, each with 8 vertices.
+
+The `graph()` function takes three key arguments, a set of *edges* (given as a vector with an even number of elements, where elements 1 and 2 represent the first edge, elements 3 and 4 the second edge, and so on), the variable *n* which is simply the number of vertices in the graph, and a boolean (TRUE/FALSE) variable indicating whether the graph is *directed*.
+
+# Creating simple graphs
+
+```{r}
+par(mfrow = c(1, 3))
+star <- graph(edges = c(1,2, 1,3, 1,4, 1,5, 1,6, 1,7, 1,8), n = 8, directed = FALSE)
+plot.igraph(star)
+
+circle <- graph(c(1,2, 2,3, 3,4, 4,5, 5,6, 6,7, 7,8, 8,1), n = 8, directed = FALSE)
+plot.igraph(circle)
+
+kite <- graph(c(1,2, 1,3, 2,3, 1,4, 4,5, 5,6, 5,7, 5,8, 6,7, 6,8, 7,8), n = 8, directed = FALSE)
+plot.igraph(kite)
+```
+
+```{r}
+```
+
+# Centralization
+
+We learned about node-level measures of centrality before. A related concept that applies to the whole network is that of "centralization", which is a normalized measure of the variance in some centrality across nodes. Once we have a vector of some kind of centrality score, e.g., betweenness or closeness or eigen centrality, we can use the `centralization()` function from {statnet} and{sna} to easily calculate this statistic. Doing so requires converting our graphs to {network} rather than {igraph} format using the {intergraph} function `asNetwork()`...
+
+```{r}
+# using {sna} functions
+betweenness(asNetwork(star), gmode = "graph")
+centralization(asNetwork(star), mode ="graph", betweenness)
+
+betweenness(asNetwork(circle), gmode = "graph")
+centralization(asNetwork(circle), mode ="graph", betweenness)
+
+betweenness(asNetwork(kite), gmode = "graph")
+centralization(asNetwork(kite), mode ="graph", betweenness)
+```
+
+What do you notice about the difference between the centralization of "betweenness" for the star and circle graphs? The normalized centralization for "betweeness" is maximal (1) for the star graph (1 node is central!) while it is minimal (0) for the circle graph (no node is any more central than any other)!
+
+We can also using {igraph} functions, but the `centralize()` function requires that we calculate the theortical maximum betweenness for a graph with a specified number of nodes (which `centalization()` does automatically)...
+
+```{r}
+igraph::betweenness(star)
+igraph::centralize(igraph::betweenness(star), theoretical.max = centr_betw_tmax(nodes = 8, directed = FALSE))
+
+igraph::betweenness(circle)
+igraph::centralize(igraph::betweenness(circle), theoretical.max = centr_betw_tmax(nodes = 8, directed = FALSE))
+```
+
+### Question
+
+What is the centralized "betweenness" for the *Game of Thrones* Book 1 graph we have worked with in previous classes?
+
+```{r}
+#| code-fold: true
+#| message: false
+#| results: false
+f <- "data/asoiaf-book1-edges.csv"
+e <- read_csv(f, col_names = TRUE)
+edges <- e
+edges <- filter(edges, weight >= 50)
+vertices <- data.frame(
+  id = unique(c(edges$Source,edges$Target)),
+  label = unique(c(edges$Source, edges$Target))
+)
+
+edges <- rename(edges, from = Source, to = Target, type = Type)
+
+edges <- mutate(edges,
+  width = weight / max(weight) * 20, # scale the width
+  label = weight, # label the edges with their weights
+  title = paste("Weight:", weight) # tooltip for the edges
+)
+
+got <- graph_from_data_frame(
+  d = edges,
+  vertices = vertices,
+  directed = FALSE)
+
+betweenness(asNetwork(got), gmode = "graph")
+centralization(asNetwork(got), mode ="graph", betweenness)
+```
+
+# Cutpoints and Bridges
+
+Two other important concepts tp consider when thinking about network structure are "cutpoints" and "bridges".
+
+**Cutpoints** are vertices that, if dropped, would increase the number of components in the network. Such vertices occupy important positions connecting different parts of the network.
+
+{sna} contains a function, `cutpoints()`, that can return either a vector of TRUE/FALSE indicating whether each vertex is a cutpoint or the indices of the set of vertices that are cutpoints.
+
+The code below compares the cutpoints in the three simple networks we constructed above...
+
+> **NOTE:** Here, we are using the `gplot()` function from {sna} for visualizing and are coloring the cutpoint vertices green...
+
+```{r}
+c <- cutpoints(asNetwork(star), mode="graph", return.indicator = TRUE)
+gplot(asNetwork(star), gmode="graph", vertex.col = c+2, displaylabels =TRUE, vertex.cex = 3)
+
+c <- cutpoints(asNetwork(circle), mode="graph", return.indicator = TRUE)
+gplot(asNetwork(circle), gmode="graph", vertex.col = c+2, displaylabels =TRUE, vertex.cex = 3)
+
+c <- cutpoints(asNetwork(kite), mode="graph", return.indicator = TRUE)
+gplot(asNetwork(kite), gmode="graph", vertex.col = c+2, displaylabels =TRUE, vertex.cex = 3)
+```
+
+Note that the star graph has only the central node as a cutpoint and the circle graph has no cutpoints.
+
+### Question
+
+Determine which vertices are cutpoints in the *Game of Thrones* graph... How many of them are there? Draw a graph where these are colored green.
+
+```{r}
+#| code-fold: true
+#| message: false
+#| eval: false
+c <- cutpoints(asNetwork(got), mode="graph", return.indicator = FALSE)
+length(c) # number of cutpoints
+
+c <- cutpoints(asNetwork(got), mode="graph", return.indicator = TRUE)
+sum(c) # also number of cutpoints (counting "TRUE" in a vector)
+
+gplot(asNetwork(got), gmode="graph", vertex.col = c+2 , edge.col = 1)
+```
+
+**Bridges** are the edge equivalent of a cutpoint... a bridge is an edge that, if removed, splits a component into two new components.
+
+There is no function in {sna} or {igraph} that identifies bridges, but you can copy and run the following code, which creates such a function. It takes three arguments, a *graph*, a *mode* ("digraph" for a directed graph or "graph" for an undirected graph, like other {sna} functions), and whether we want to consider components with "strong" or "weak" *connected*ness.
+
+```{r}
+bridges <- function(graph, mode="graph", connected=c("strong", "weak")) {
+  e_cnt <- network.edgecount(graph)
+  if (mode == "graph") {
+    cmp_cnt <- components(graph)
+    b_vec <- rep(FALSE,e_cnt)
+    for(i in 1:e_cnt){
+      g <- graph
+      delete.edges(g,i)
+      b_vec[i] <- (components(g) != cmp_cnt)
+      }
+    } else {
+      cmp_cnt <- components(graph,connected=connected)
+      b_vec <- rep(FALSE,e_cnt)
+      for(i in 1:e_cnt){
+        g <- graph
+        delete.edges(g,i)
+        b_vec[i] <- (components(g,connected=connected)
+!= cmp_cnt)
+      }
+    }
+  return(b_vec)
+}
+```
+
+We can run this function on our simple graphs and visualize the results, where "bridge" edges are shown in green...
+
+```{r}
+b <- bridges(asNetwork(star))
+gplot(asNetwork(star), gmode="graph", edge.col= b+2, displaylabels=TRUE)
+
+b <- bridges(asNetwork(circle))
+gplot(asNetwork(circle), gmode="graph", edge.col= b+2, displaylabels=TRUE)
+
+b <- bridges(asNetwork(kite))
+gplot(asNetwork(kite), gmode="graph", edge.col= b+2, displaylabels=TRUE)
+```
+
+> **NOTE:** The circle graph has no bridges.
+
+### Question
+
+Determine which edges in the *Game of Thrones* graph are bridges... How many of them are there? Draw a graph where these are colored green.
+
+```{r}
+#| code-fold: true
+#| message: false
+#| eval: false
+
+b <- bridges(asNetwork(got))
+gplot(asNetwork(got), gmode="graph", edge.col= b+2)
+
+# most edges are bridges!
+```
+
+# Subgroups
+
+Many networks are made up of relatively densely connected subgroups (or subgraph) that are connected to one another via fewer edges. A number of methods exist for defining and identify such subgroups.
+
+### Cliques
+
+A **clique** is a *maximally complete subgraph*, that is, a subset of vertices in a graph that have all possible edges among them.
+
+The {igraph} functions `cliques()` and `max_cliques()` can be used to quickly find subgraphs that meet this criterion.
+
+The code below finds all of the cliques comprising at least three vertices in the three simple graphs we have been working with. Usually, we are only interested in cliques of size 3 or more (every dyad is clique, but those are not very interesting).
+
+```{r}
+cliques(star, min = 3)
+cliques(circle, min = 3)
+cliques(kite, min = 3)
+max_cliques(kite, min = 3)
+```
+
+> **NOTE:** `cliques()` finds all cliques while `max_cliques()` finds just the maximal cliques, i.e., those that cannot be extended to a larger clique by adding in other vertices. The function `largest_cliques()` will return the largest cliques in a graph.
+
+### Question
+
+What cliques of size 3 or more exist the *Game of Thrones* graph?
+
+```{r}
+#| code-fold: true
+#| message: false
+#| eval: false
+max_cliques(got, min = 3)
+largest_cliques(got)
+```
+
+## $k$-Cores
+
+A **$k$-core** is a maximal subgraph where each vertex is connected to at least $k$ other vertices in the subgraph. Load in or reconstruct the Harry Potter dataset we have used previously to look at $k$-cores. Here, I have saved the Harry Potter graph as "hp.csv" and I load it in and plot it with {visNetwork}... 
+
+```{r}
+#| message: false
+hp <- read_csv("data/hp.csv", col_names = TRUE)
+hp <- graph_from_data_frame(hp, directed = TRUE)
+visIgraph(hp,
+          idToLabel = FALSE,
+          layout = "layout_with_kk",
+          randomSeed = 42)
+```
+
+The function `coreness()` returns a vector listing the highest sized "core" to which each vertex in the network belongs. We can then visualize this by coloring vertices according to coreness...
+
+```{r}
+coreness <- coreness(hp)
+table(coreness) # the largest k-core is 15... every vertex in this core has a degree of at least 15
+V(hp)$color <- coreness
+visIgraph(hp,
+          idToLabel = FALSE,
+          layout = "layout_with_kk",
+          randomSeed = 42) %>%
+  visGroups(V(hp)$color) %>%
+  visLegend(main = "Coreness", ncol = 2)
+```
+
+## Clustering
+
+Both cliques and $k$-cores rely on the pattern of internal ties to define groups, but there are other *community detection* algorithms that instead try to identify internally cohesive subgroups of vertices that are somewhat separated or isolated from other such subgroups. The {igraph} package includes a large number of cluster detection algorithms.
+
+```{r}
+#| echo: false
+#| out-width: "90%"
+knitr::include_graphics("img/community_detection.png")
+```
+
+Running one of these functions on a graph will return a data structure called a `communities()` object that contains the clusters identified in the graph. Running the function `membership()` on the object returned by one of the community detection functions returns the cluster to which each vertex is assigned. Running the `plot()` function on a communities object will plot the graph showing the assigned clusters.
+
+```{r}
+c <- cluster_walktrap(kite)
+membership(c)
+plot(c, kite)
+
+c <- cluster_edge_betweenness(kite)
+membership(c)
+plot(c, kite)
+```
+
+### Question
+
+What communities do you find in the *Game of Thrones* graph? In the *Harry Potter* graphs?
+
+```{r}
+#| code-fold: true
+#| message: false
+#| eval: false
+c <- cluster_fast_greedy(got)
+membership(c)
+plot(c, got)
+
+# the edge betweenness and infomap algorithms work with directed graphs...
+c <- cluster_edge_betweenness(hp)
+membership(c)
+plot(c, hp)
+
+c <- cluster_infomap(hp)
+membership(c)
+plot(c, hp)
+```

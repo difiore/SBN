@@ -19,8 +19,10 @@ editor_options:
 -   Peeking at a data set: `head()`, `tail()`, `glimpse()`
 -   Wrangling data frames with {tidyverse} commands: `filter()`, `rename()`
 -   Creating a data frame from scratch with field names: `data.frame()`
--   Running functions from {visNetwork} and {igraph} and adjusting argument values: `visNetwork()`, `graph_from_data_frame()`, `E()`, `V()`
+-   Running functions from {visNetwork} and {igraph} to create networks and understanding argument values: `visNetwork()`, `graph_from_data_frame()`, `E()`, `V()`
 -   Writing out {igraph} objects to a file, e.g., in ".csv" or ".graphml" format
+-   Calculating node-level centrality metrics to describe network structure
+-   Calculating clustering coefficients
 
 # Introduction
 
@@ -495,11 +497,24 @@ visNetwork(nodes = centralities, edges = edges) %>%
 
 ## Transitivity or clustering coefficient
 
-The {igraph} function `transitivity()` can be used to calculate various clustering coefficients
+The local **transitivity** or **clustering coefficient** of a vertex is a measure of how connected the neighbors of that vertex are to one another. It is calculated as...
+
+$$C_{i}=\frac{2\times e_{i}}{k_{i}(k_{i}-1)}$$
+
+... where $k_{i}$ = the number of neighbors of vertex $i$ (i.e., the degree of node $i$), and $e_{i}$ = the edges linking neighbors of vertex $i$.
+
+Global transitivity is the ratio of the overall count of triangles to connected trios of vertices (both connected and unconnected) in the graph.
+
+The {igraph} function `transitivity()` can be used to calculate these two clustering coefficients
 
 ```{r}
-transitivity(graph, type = "global")
 transitivity(graph, type = "local")
+transitivity(graph, type = "global")
+```
+
+We can also use this function to calculate the average transitivity across vertices...
+
+```{r}
 transitivity(graph, type = "localaverage")
 ```
 
