@@ -3113,8 +3113,8 @@ vertical-align: -.125em;
 </blockquote>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;characters.csv&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;relations.csv&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/characters.csv&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;data/relations.csv&quot;</span>, <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We now need to do some manipulations to wrangle the data get it into the format we are used to in order to make a graph object and be able to visualize it.</p>
 <p>We first create a data frame of edges…</p>
@@ -3154,9 +3154,9 @@ vertical-align: -.125em;
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH fab0347 UN-- 65 356 -- 
+<pre><code>IGRAPH 8f3bc3f UN-- 65 356 -- 
 + attr: name (v/c), label (v/c), relationship (e/c), type (e/c)
-+ edges from fab0347 (vertex names):
++ edges from 8f3bc3f (vertex names):
  [1] Sirius Black  --Albus Dumbledore       
  [2] Sirius Black  --Hermione Granger       
  [3] Sirius Black  --Remus Lupin            
