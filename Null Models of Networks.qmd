@@ -33,7 +33,7 @@ plot_dd <- function(g) {
     xlab("Degree") +
     ylab("Relative Frequency") +
     scale_x_continuous(breaks = seq(0, length(degree_distribution(g))-1, by = 1)) +
-    ggtitle(paste0( vcount(g), " nodes, ", ecount(g), " edges\nDeg Dist: (mean deg: ", round(mean(degree(g)),2), ", var deg: ", round(var(degree(g)), 2), ")\nGlobal Transitivity: ", round(transitivity(g, type = "global"), 4), "\nDiameter: ", diameter(g), "\nEdge Density: ", round(edge_density(g),4)))
+    ggtitle(paste0( vcount(g), " nodes, ", ecount(g), " edges\nDeg Dist: (mean deg: ", round(mean(degree(g)),2), ", var deg: ", round(var(degree(g)), 2), ")\nGlobal Transitivity (Clustering Coeff): ", round(transitivity(g, type = "global"), 4), "\nDiameter: ", diameter(g), "\nMean Distance: ", round(mean_distance(g), 4), "\nEdge Density: ", round(edge_density(g),4)))
 }
 ```
 
@@ -270,34 +270,125 @@ plot_dd(g)
 
 ## Important Point 1
 
-With appropriate rewiring probabilities, small world random graphs can have more realistic measures of transitivity (i.e., that are more like those of real world graphs) than random graphs with similar numbers of vertices and edges. For example, compare the transitivities across the following...
+With appropriate rewiring probabilities, small world random graphs can have more realistic (higher) measures of transitivity or clustering (i.e., that are more like those of real world graphs) than random graphs with similar numbers of vertices and edges. For example, compare the transitivities across the following...
 
 ```{r}
 # Harry Potter graph
 hp <- read_csv("data/hp.csv", col_names = TRUE)
-hp <- graph_from_data_frame(hp, directed = TRUE)
+hp <- graph_from_data_frame(hp, directed = FALSE)
+plot(hp)
 plot_dd(hp)
 
 # similar small world graph
-sm <- sample_smallworld(dim = 1, size = 64, nei = 4, p = 0.1) # try tweaking p... when p = 1, graph resembles random graph
-plot_dd(sm)
+sw <- sample_smallworld(dim = 1, size = 64, nei = 4, p = 1) # try tweaking p... when p = 1, graph resembles random graph
+plot(sw)
+plot_dd(sw)
 
 # similar random graphs
-sm <- sample_gnp(n = 64, p = 222/((64 * 63)/2))
-plot_dd(sm)
+rg1 <- sample_gnp(n = 64, p = 222/((64 * 63)/2))
+plot(rg1)
+plot_dd(rg1)
 
-sm <- sample_gnm(n = 64, m = 222)
-plot_dd(sm)
+rg2 <- sample_gnm(n = 64, m = 222)
+plot(rg2)
+plot_dd(rg2)
 ```
 
-Note, however, that the degree distributions and edge densities of both the small world and random graphs are poor matches to that of the "real world" Harry Potter graph... the degree distributions are unimodal, have much lower variance, and lack a long tail and the edge densities are much higher.
+Note that the transitivity of the small-world graph is greater and more similar to that of the "real world" Harry Potter graph (in contrast to those of the Erdos-Reyni random graphs).
+
+Also note, though, that the degree distributions and edge densities of both the small world and random graphs are poor matches to that of the "real world" graph... the degree distributions are unimodal rather than right-skewed, have much lower variance (lower, even, in the small-world graphs compared to random graphs), and lack a long tail and the edge densities are much higher.
+
+The mean distance and diameter of the small world (and even the random graphs) is also shorter than in the original Harry Potter network. This is an example of the "small-world phenomenon", where nodes are linked through a short chain of other nodes, even in very large graphs.
+
+In the example below, note that at very low values of the rewiring probability, the diameter and mean distance in even very large "small world" graphs are low and approach those of random graphs, while the clustering coefficient is much higher.
+
+```{r}
+rg <- sample_gnp(2000, p = 0.02)
+plot_dd(rg)
+
+dist <- list()
+diam <- list()
+clust <- list()
+for (i in 0:100){
+  sw <- sample_smallworld(dim = 1, size = 2000, nei = 20, p = i/100)
+  diam[[i + 1]] <- diameter(sw)
+  dist[[i + 1]] <- round(mean_distance(sw), 4)
+  clust[[i + 1]] <- round(transitivity(sw, type = "global"), 4)
+}
+d <- tibble(p=seq(0, 1, by = 0.01), dist = unlist(dist), diam = unlist(diam), clust = unlist(clust))
+ggplot(data = d, aes(x=p, y = diam)) + geom_point()
+ggplot(data = d, aes(x=p, y = dist)) + geom_point()
+ggplot(data = d, aes(x=p, y = clust)) + geom_point()
+sw <- sample_smallworld(dim = 1, size = 2000, nei = 20, p = 0.05)
+plot_dd(sw)
+```
+
 
 # Scale-Free Random Graphs
 
-Many real-world graphs have degree distributions where the modal degree is low and the distribution is long-tailed. These distributions generally follow a "power-low" where the frequency of nodes with a particular degree decays exponentially as degree increases. These are also known as "scale-free" networks. A random model of network formation that can produce these kinds of degree distributions is called "preferential attachment", where as new nodes are added into a network, they are preferentially connected to existing nodes that already have links to other nodes. For example...
+Many real-world graphs (like the Harry Potter example above) have degree distributions where the average and modal degree are low and the distribution is right-skewed and long-tailed. These distributions generally follow a "power-low" where the frequency of nodes with a particular degree decays exponentially as degree increases. These are also known as "scale-free" networks. One random model of network formation that can produce these kinds of degree distributions is called "preferential attachment", where as new nodes are added into a network, they are preferentially connected to existing nodes in relation to how many connections they already have. In {igraph}, the `sample_pa()` function can be used to create null graphs using a tuneable preferential attachment algorithm. Note that, with default conditions, preferential attachment will only create networks that are fully connected (no isolated vertices).
+
+For example, consider the following graphs, each with 100 edges and a mean degree of ~2...
 
 ```{r}
-g <- sample_pa(n = 64, directed = FALSE)
+g <- sample_pa(n = 100, power = 0.5, directed = FALSE)
+V(g)$color <- "lightblue"
+V(g)[degree(g) > 5]$color <- "red"
 plot.igraph(g, vertex.size = 5, vertex.label = NA)
 plot_dd(g)
+
+g <- sample_pa(n = 100, power = 1.5, directed = FALSE)
+V(g)$color <- "lightblue"
+V(g)[degree(g) > 5]$color <- "red"
+plot.igraph(g, vertex.size = 5, vertex.label = NA)
+plot_dd(g)
+
+g <- sample_pa(n = 100, power = 2, directed = FALSE)
+V(g)$color <- "lightblue"
+V(g)[degree(g) > 5]$color <- "red"
+plot.igraph(g, vertex.size = 5, vertex.label = NA)
+plot_dd(g)
+
+g <- sample_pa(n = 100, power = 3, directed = FALSE)
+V(g)$color <- "lightblue"
+V(g)[degree(g) > 5]$color <- "red"
+plot.igraph(g, vertex.size = 5, vertex.label = NA)
+plot_dd(g)
+```
+
+Using the "out.dist=" argument, we can make somewhat more "realistic" looking networks...
+
+```{r}
+g <- sample_pa(n = 64, power = 1, directed = FALSE, out.dist = c(0.1, 0.257, 0.25, 0.125, 0.1, 0.05, 0.05, 0.025, 0.025))
+V(g)$color <- "lightblue"
+V(g)[degree(g) > 5]$color <- "red"
+plot.igraph(g, vertex.size = 5, vertex.label = NA)
+plot_dd(g)
+
+# compare to...
+V(hp)$color <- "lightblue"
+V(hp)[degree(hp) > 5]$color <- "red"
+plot.igraph(hp, vertex.size = 5, vertex.label = NA)
+plot_dd(hp)
+```
+
+## Important Point 1
+
+What makes a "scale free" network is that the degree distribution roughly follows a power-law. If that is the case, then the datapoints for the tail should fall rougly along a horizontal line (when plotted on an untransformed scale) and along a straight line (when plotted on a log-log scale).
+
+```{r}
+g <- sample_pa(n = 10000, power = 1, directed = FALSE)
+V(g)$color <- "lightblue"
+V(g)[degree(g) > 5]$color <- "red"
+plot.igraph(g, vertex.size = 5, vertex.label = NA)
+plot_dd(g)
+plot(degree.distribution(g),log='xy',
+xlab = "Degree", ylab = "Relative Frequency")
+```
+
+Our Harry Potter network does not follow this exactly, but it is pretty close...
+
+```{r}
+plot(degree.distribution(hp),log='xy',
+xlab = "Degree", ylab = "Relative Frequency")
 ```
