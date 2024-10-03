@@ -3154,9 +3154,9 @@ vertical-align: -.125em;
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">directed =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>graph</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>IGRAPH 8f3bc3f UN-- 65 356 -- 
+<pre><code>IGRAPH 30501fa UN-- 65 356 -- 
 + attr: name (v/c), label (v/c), relationship (e/c), type (e/c)
-+ edges from 8f3bc3f (vertex names):
++ edges from 30501fa (vertex names):
  [1] Sirius Black  --Albus Dumbledore       
  [2] Sirius Black  --Hermione Granger       
  [3] Sirius Black  --Remus Lupin            
@@ -3170,7 +3170,7 @@ vertical-align: -.125em;
 </div>
 <p>We can run the <code>simplify()</code> function from {igraph} to remove loops (edges from a vertex to itself) and multiple edges (where the same edge is specified more than once) from the graph. This particular Harry Potter dataset is noisy and has some of each of those types of edges!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>graph <span class="ot">&lt;-</span> <span class="fu">simplify</span>(graph, <span class="at">remove.loops =</span> <span class="cn">TRUE</span>, <span class="at">remove.multiple =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>graph <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">simplify</span>(graph, <span class="at">remove.loops =</span> <span class="cn">TRUE</span>, <span class="at">remove.multiple =</span> <span class="cn">TRUE</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="challenges" class="level2">

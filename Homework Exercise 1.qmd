@@ -89,7 +89,7 @@ graph
 We can run the `simplify()` function from {igraph} to remove loops (edges from a vertex to itself) and multiple edges (where the same edge is specified more than once) from the graph. This particular Harry Potter dataset is noisy and has some of each of those types of edges!
 
 ```{r}
-graph <- simplify(graph, remove.loops = TRUE, remove.multiple = TRUE) 
+graph <- igraph::simplify(graph, remove.loops = TRUE, remove.multiple = TRUE) 
 ```
 
 ## Challenges

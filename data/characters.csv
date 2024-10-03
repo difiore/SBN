@@ -1,66 +1,66 @@
-id,name,bio
-0,Regulus Arcturus Black,Brother of Sirius. Used to be a Death Eater but defected.
-1,Sirius Black,Best friend of James Potter and godfather of Harry.
-2,Lavender Brown,Killed by a werewolf. She was a gryffindor student who dated Ron. 
-3,Cho Chang,Ravenclaw student who dated Cedric Diggory and Harry Potter.
-4,Vincent Crabbe Sr.,Father of Crabbe and death-eater who escaped Azkaban.
-5,Vincent Crabbe,Slytherin student who was best friends with Goyle and followed Draco.
-6,"Bartemius ""Barty"" Crouch Sr.",Head of the department of Internation Magical Cooperation. Killed by his son.
-7,"Bartemius ""Barty"" Crouch Jr.",Death Eater who impersonated Alastor Moody.
-8,Fleur Delacour,Participated in the Triwizard tournament and married Bill Weasley.
-9,Cedric Diggory,Participated in the Triwizard tournament and got killed by Voldemort.
-10,Alberforth Dumbledore,Albus' brother and owner of Hog's Head.
-11,Albus Dumbledore,Headmaster of Hogwards killed by Snape.
-12,Dudley Dursley,Muggle son of Vernon and Petunia and first-cousin of Harry.
-13,Petunia Dursley,Harry's aunt and sister of Lily.
-14,Vernon Dursley,Harry's muggle uncle.
-15,Argus Filch,Squib caretake of Hogwards.
-16,Seamus Finnigan,Harry's friend and member of Dumbledore's army.
-17,Nicolas Flamel,Creator of the Philosopher's Stone.
-18,Cornelius Fudge,Minister of Magic that was forced to resign.
-19,Goyle Sr.,Death Eater and father of Gregory Goyle.
-20,Gregory Goyle,Best friend of Crabbe. Slytherin student and dies by falling into Fiendfyre.
-21,Hermione Granger,One of Harry's best friend and marries Ron Weasley.
-22,Rubeus Hagrid,Half-giant who loves Harry. He was the keeper of Keys and Grounds at Hogwards.
-23,Igor Karkaroff,Highmaster of Durmstrang and reformed death-eater.
-24,Viktor Krum,Participant in the Triwizard tournament. Dated Hermione.
-25,Bellatrix Lestrange,Death Eater who was killed by Molly Weasley.
-26,Alice Longbottom,Mother of Neville who was tortured by Bellatrix.
-27,Frank Longbottom,Father of Neville who was tortured by Bellatrix.
-28,Neville Longbottom,Gryffindor student who was a member of Dumbledore's army.
-29,Luna Lovegood,Ravenclaw student who was a member of Dumbledore's army.
-30,Xenophilius Lovegood,Father of Luna and editor of The Quibbler.
-31,Remus Lupin,Friend of James Potter and werewolf. He married Nymphadora.
-32,Draco Malfoy,Slytherin student who had many arguments with Harry.
-33,Lucius Malfoy,Father of Draco and influential Death-Eater.
-34,Narcissa Malfoy,Mother of Draco and sister of Bellatrix.
-35,Olympe Maxime,Half-giantess and headmistress of Beauxbatons.
-36,Minerva McGonagall,Professor of Transfiguration and head of Gryffindor.
-37,"Alastor ""Mad-Eye"" Moody",Retired auror and member of the order of the Phoenix. Killed by Voldemort.
-38,Peter Pettigrew,Betrays James and Lily Potter. Follower of Voldemort.
-39,Harry Potter,The boy who lived. Main character of the series.
-40,James Potter,Father of Harry. Murdered by Voldemort.
-41,Lily Potter,Mother of Harry. Murdered by Voldemort.
-42,Quirinus Quirrell,Possessed by Voldemort. Defence against the Dark Arts professor.
-43,Tom Riddle Sr.,Muggle father of Voldemort who was killed by him.
-44,Mary Riddle,Muggle mother of Voldemort who was killed by him.
-45,Lord Voldemort,The antagonist of the series who murdered many.
-46,Rita Skeeter,Reporter at the Daily Prophet.
-47,Severus Snape,Head of the Slytherin house and saved Harry in many occasions.
-48,Nymphadora Tonks,Married Remus Lupin and was killed by Bellatrix.
-49,Dolores Janes Umbridge,Senior undersecretary to the Ministry of Magic. Eventually sent to Azkaban.
-50,Arthur Weasley,Father of the Weasleys and member of the Order of the Phoenix.
-51,Bill Weasley,Oldest son of Arthur and Molly. Husband of Fleur. 
-52,Charlie Weasley,Second son of Arthur and Molly. Works with dragons in Romania.
-53,Fred Weasley,Identical twin with George and co-owner of Weasleys' Wizard Wheezes
-54,George Weasley,Identical twin with Fred and co-owner of Weasleys' Wizard Wheezes
-55,Ginny Weasley,Marries Harry Potter and only daughter of Molly and Arthur.
-56,Molly Weasley,Wife of Arthur and mother of the Weasleys. Kills Bellatrix.
-57,Percy Weasley,Third son of Arthur and Molly. He is a Gryffindor prefect.
-58,Ron Weasley,Harry's best friend. Marries Hermione.
-59,Dobby,House elf and friend of Harry. He is killed by Bellatrix.
-60,Fluffy,Three-headed dog belonging to Rubeus Hagrid.
-61,Hedwig,Harry's owl.
-62,Moaning Myrtle,Ghost at Hogwards.
-63,Aragog,Acromantula belonging to Rubeus Hagrid.
-64,Grawp,Giant-half brother of Hagrid.
+id,name,bio,sex
+0,Regulus Arcturus Black,Brother of Sirius. Used to be a Death Eater but defected.,M
+1,Sirius Black,Best friend of James Potter and godfather of Harry.,M
+2,Lavender Brown,Killed by a werewolf. She was a gryffindor student who dated Ron. ,F
+3,Cho Chang,Ravenclaw student who dated Cedric Diggory and Harry Potter.,F
+4,Vincent Crabbe Sr.,Father of Crabbe and death-eater who escaped Azkaban.,M
+5,Vincent Crabbe,Slytherin student who was best friends with Goyle and followed Draco.,M
+6,"Bartemius ""Barty"" Crouch Sr.",Head of the department of Internation Magical Cooperation. Killed by his son.,M
+7,"Bartemius ""Barty"" Crouch Jr.",Death Eater who impersonated Alastor Moody.,M
+8,Fleur Delacour,Participated in the Triwizard tournament and married Bill Weasley.,F
+9,Cedric Diggory,Participated in the Triwizard tournament and got killed by Voldemort.,M
+10,Alberforth Dumbledore,Albus' brother and owner of Hog's Head.,M
+11,Albus Dumbledore,Headmaster of Hogwards killed by Snape.,M
+12,Dudley Dursley,Muggle son of Vernon and Petunia and first-cousin of Harry.,M
+13,Petunia Dursley,Harry's aunt and sister of Lily.,F
+14,Vernon Dursley,Harry's muggle uncle.,M
+15,Argus Filch,Squib caretake of Hogwards.,M
+16,Seamus Finnigan,Harry's friend and member of Dumbledore's army.,M
+17,Nicolas Flamel,Creator of the Philosopher's Stone.,M
+18,Cornelius Fudge,Minister of Magic that was forced to resign.,M
+19,Goyle Sr.,Death Eater and father of Gregory Goyle.,M
+20,Gregory Goyle,Best friend of Crabbe. Slytherin student and dies by falling into Fiendfyre.,M
+21,Hermione Granger,One of Harry's best friend and marries Ron Weasley.,F
+22,Rubeus Hagrid,Half-giant who loves Harry. He was the keeper of Keys and Grounds at Hogwards.,M
+23,Igor Karkaroff,Highmaster of Durmstrang and reformed death-eater.,M
+24,Viktor Krum,Participant in the Triwizard tournament. Dated Hermione.,M
+25,Bellatrix Lestrange,Death Eater who was killed by Molly Weasley.,F
+26,Alice Longbottom,Mother of Neville who was tortured by Bellatrix.,F
+27,Frank Longbottom,Father of Neville who was tortured by Bellatrix.,M
+28,Neville Longbottom,Gryffindor student who was a member of Dumbledore's army.,M
+29,Luna Lovegood,Ravenclaw student who was a member of Dumbledore's army.,F
+30,Xenophilius Lovegood,Father of Luna and editor of The Quibbler.,M
+31,Remus Lupin,Friend of James Potter and werewolf. He married Nymphadora.,M
+32,Draco Malfoy,Slytherin student who had many arguments with Harry.,M
+33,Lucius Malfoy,Father of Draco and influential Death-Eater.,M
+34,Narcissa Malfoy,Mother of Draco and sister of Bellatrix.,F
+35,Olympe Maxime,Half-giantess and headmistress of Beauxbatons.,F
+36,Minerva McGonagall,Professor of Transfiguration and head of Gryffindor.,F
+37,"Alastor ""Mad-Eye"" Moody",Retired auror and member of the order of the Phoenix. Killed by Voldemort.,M
+38,Peter Pettigrew,Betrays James and Lily Potter. Follower of Voldemort.,M
+39,Harry Potter,The boy who lived. Main character of the series.,M
+40,James Potter,Father of Harry. Murdered by Voldemort.,M
+41,Lily Potter,Mother of Harry. Murdered by Voldemort.,F
+42,Quirinus Quirrell,Possessed by Voldemort. Defence against the Dark Arts professor.,M
+43,Tom Riddle Sr.,Muggle father of Voldemort who was killed by him.,M
+44,Mary Riddle,Muggle mother of Voldemort who was killed by him.,F
+45,Lord Voldemort,The antagonist of the series who murdered many.,M
+46,Rita Skeeter,Reporter at the Daily Prophet.,F
+47,Severus Snape,Head of the Slytherin house and saved Harry in many occasions.,M
+48,Nymphadora Tonks,Married Remus Lupin and was killed by Bellatrix.,F
+49,Dolores Janes Umbridge,Senior undersecretary to the Ministry of Magic. Eventually sent to Azkaban.,F
+50,Arthur Weasley,Father of the Weasleys and member of the Order of the Phoenix.,M
+51,Bill Weasley,Oldest son of Arthur and Molly. Husband of Fleur. ,M
+52,Charlie Weasley,Second son of Arthur and Molly. Works with dragons in Romania.,M
+53,Fred Weasley,Identical twin with George and co-owner of Weasleys' Wizard Wheezes,M
+54,George Weasley,Identical twin with Fred and co-owner of Weasleys' Wizard Wheezes,M
+55,Ginny Weasley,Marries Harry Potter and only daughter of Molly and Arthur.,F
+56,Molly Weasley,Wife of Arthur and mother of the Weasleys. Kills Bellatrix.,F
+57,Percy Weasley,Third son of Arthur and Molly. He is a Gryffindor prefect.,M
+58,Ron Weasley,Harry's best friend. Marries Hermione.,M
+59,Dobby,House elf and friend of Harry. He is killed by Bellatrix.,M
+60,Fluffy,Three-headed dog belonging to Rubeus Hagrid.,M
+61,Hedwig,Harry's owl.,F
+62,Moaning Myrtle,Ghost at Hogwards.,F
+63,Aragog,Acromantula belonging to Rubeus Hagrid.,M
+64,Grawp,Giant-half brother of Hagrid.,M
