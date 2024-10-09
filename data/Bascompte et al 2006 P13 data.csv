@@ -1,0 +1,251 @@
+﻿from,to,pair,dep_animal_on_plant,dep_plant_on_animal,ASYMMETRY
+Adscita statices,Silene dioica,Adscita statices_Silene dioica,0.59,0.037,0.937
+Adscita statices,Verbascum thapsus,Adscita statices_Verbascum thapsus,0.131,0.067,0.492
+Adscita statices, Melilotus alba,Adscita statices_ Melilotus alba,0.098,0.122,0.197
+Adscita statices,Epilobium montanum,Adscita statices_Epilobium montanum,0.082,0.056,0.322
+Adscita statices,Chamomilla recutita,Adscita statices_Chamomilla recutita,0.066,0.074,0.115
+Adscita statices,Achillea millefolium,Adscita statices_Achillea millefolium,0.033,0.019,0.435
+Agromyzidae sp.,Trifolium repens,Agromyzidae sp._Trifolium repens,1,0.048,0.952
+Anthomyiidae sp.,Tripleurospermum inodorum,Anthomyiidae sp._Tripleurospermum inodorum,0.833,0.009,0.99
+Anthomyiidae sp.,Vicia hirsuta,Anthomyiidae sp._Vicia hirsuta,0.167,0.077,0.538
+"Apion aeneum Fabricius, Curculionidae", Malva sylvestris,"Apion aeneum Fabricius, Curculionidae_ Malva sylvestris",1,0.143,0.857
+Apion flavipes Paykull,Trifolium repens,Apion flavipes Paykull_Trifolium repens,1,0.095,0.905
+Apion hookeri Kirby,Cirsium arvense,Apion hookeri Kirby_Cirsium arvense,0.625,0.033,0.947
+Apion hookeri Kirby,Tripleurospermum inodorum,Apion hookeri Kirby_Tripleurospermum inodorum,0.312,0.009,0.972
+Apion hookeri Kirby, Melilotus alba,Apion hookeri Kirby_ Melilotus alba,0.063,0.041,0.347
+Apion meliloti Kirby, Melilotus alba,Apion meliloti Kirby_ Melilotus alba,1,0.02,0.98
+Apion rufirostre Fabricius,Verbascum thapsus,Apion rufirostre Fabricius_Verbascum thapsus,0.952,0.067,0.93
+Apion rufirostre Fabricius, Malva sylvestris,Apion rufirostre Fabricius_ Malva sylvestris,0.048,0.143,0.667
+Apocrita (Entomophaga) sp.,Cirsium arvense,Apocrita (Entomophaga) sp._Cirsium arvense,0.273,0.133,0.512
+Apocrita (Entomophaga) sp.,Tripleurospermum inodorum,Apocrita (Entomophaga) sp._Tripleurospermum inodorum,0.273,0.069,0.748
+Apocrita (Entomophaga) sp.,Ranunculus repens,Apocrita (Entomophaga) sp._Ranunculus repens,0.205,0.022,0.894
+Apocrita (Entomophaga) sp.,Tanacetum vulgare,Apocrita (Entomophaga) sp._Tanacetum vulgare,0.072,0.036,0.505
+Apocrita (Entomophaga) sp., Melilotus alba,Apocrita (Entomophaga) sp._ Melilotus alba,0.062,0.367,0.833
+Apocrita (Entomophaga) sp.,Silene dioica,Apocrita (Entomophaga) sp._Silene dioica,0.041,0.012,0.699
+Apocrita (Entomophaga) sp.,Senecio jacobaea,Apocrita (Entomophaga) sp._Senecio jacobaea,0.021,0.031,0.337
+Apocrita (Entomophaga) sp.,Chaerophyllum temulentum,Apocrita (Entomophaga) sp._Chaerophyllum temulentum,0.014,0.042,0.672
+Apocrita (Entomophaga) sp.,Lapsana communis,Apocrita (Entomophaga) sp._Lapsana communis,0.014,0.08,0.829
+Apocrita (Entomophaga) sp.,Trifolium dubium,Apocrita (Entomophaga) sp._Trifolium dubium,0.014,0.4,0.966
+Apocrita (Entomophaga) sp.,Aegopodium podagraria,Apocrita (Entomophaga) sp._Aegopodium podagraria,0.007,0.286,0.976
+Apocrita (Entomophaga) sp.,Cirsium vulgare ,Apocrita (Entomophaga) sp._Cirsium vulgare ,0.004,0.024,0.83
+Apocrita (Entomophaga) sp.,Echium vulgare,Apocrita (Entomophaga) sp._Echium vulgare,0.001,0.048,0.971
+"Bombus hortorum (Linnaeus), Apidae",Ranunculus repens,"Bombus hortorum (Linnaeus), Apidae_Ranunculus repens",0.444,0.043,0.902
+"Bombus hortorum (Linnaeus), Apidae",Tripleurospermum inodorum,"Bombus hortorum (Linnaeus), Apidae_Tripleurospermum inodorum",0.333,0.078,0.767
+"Bombus hortorum (Linnaeus), Apidae",Epilobium montanum,"Bombus hortorum (Linnaeus), Apidae_Epilobium montanum",0.093,0.278,0.667
+"Bombus hortorum (Linnaeus), Apidae",Silene dioica,"Bombus hortorum (Linnaeus), Apidae_Silene dioica",0.044,0.012,0.722
+"Bombus hortorum (Linnaeus), Apidae",Tanacetum vulgare,"Bombus hortorum (Linnaeus), Apidae_Tanacetum vulgare",0.033,0.015,0.543
+"Bombus hortorum (Linnaeus), Apidae",Prunella vulgaris,"Bombus hortorum (Linnaeus), Apidae_Prunella vulgaris",0.03,0.286,0.896
+"Bombus hortorum (Linnaeus), Apidae",Stachys sylvatica,"Bombus hortorum (Linnaeus), Apidae_Stachys sylvatica",0.022,0.429,0.948
+Bombus lapidarius (Linnaeus),Trifolium repens,Bombus lapidarius (Linnaeus)_Trifolium repens,0.862,0.048,0.945
+Bombus lapidarius (Linnaeus),Tanacetum vulgare,Bombus lapidarius (Linnaeus)_Tanacetum vulgare,0.097,0.015,0.843
+Bombus lapidarius (Linnaeus),Trifolium dubium,Bombus lapidarius (Linnaeus)_Trifolium dubium,0.022,0.2,0.892
+Bombus lapidarius (Linnaeus),Cirsium vulgare ,Bombus lapidarius (Linnaeus)_Cirsium vulgare ,0.019,0.036,0.463
+Bombus lucorum (Linnaeus),Cirsium vulgare ,Bombus lucorum (Linnaeus)_Cirsium vulgare ,1,0.024,0.976
+Bombus pascuorum (Scopoli),Trifolium repens,Bombus pascuorum (Scopoli)_Trifolium repens,0.667,0.095,0.857
+Bombus pascuorum (Scopoli),Silene dioica,Bombus pascuorum (Scopoli)_Silene dioica,0.1,0.025,0.753
+Bombus pascuorum (Scopoli),Verbascum thapsus,Bombus pascuorum (Scopoli)_Verbascum thapsus,0.083,0.167,0.5
+Bombus pascuorum (Scopoli),Prunella vulgaris,Bombus pascuorum (Scopoli)_Prunella vulgaris,0.05,0.429,0.883
+Bombus pascuorum (Scopoli),Cirsium vulgare ,Bombus pascuorum (Scopoli)_Cirsium vulgare ,0.038,0.181,0.792
+Bombus pascuorum (Scopoli),Stachys sylvatica,Bombus pascuorum (Scopoli)_Stachys sylvatica,0.025,0.429,0.942
+Bombus pascuorum (Scopoli),Echium vulgare,Bombus pascuorum (Scopoli)_Echium vulgare,0.02,0.571,0.965
+Bombus pascuorum (Scopoli),Myosotis palustris,Bombus pascuorum (Scopoli)_Myosotis palustris,0.008,0.077,0.892
+Bombus pascuorum (Scopoli), Melilotus alba,Bombus pascuorum (Scopoli)_ Melilotus alba,0.004,0.02,0.796
+Bombus pascuorum (Scopoli),Trifolium dubium,Bombus pascuorum (Scopoli)_Trifolium dubium,0.004,0.1,0.958
+Bombus pratorum (Linnaeus),Tripleurospermum inodorum,Bombus pratorum (Linnaeus)_Tripleurospermum inodorum,0.61,0.009,0.986
+Bombus pratorum (Linnaeus),Senecio jacobaea,Bombus pratorum (Linnaeus)_Senecio jacobaea,0.244,0.021,0.915
+Bombus pratorum (Linnaeus),Cirsium vulgare ,Bombus pratorum (Linnaeus)_Cirsium vulgare ,0.146,0.048,0.671
+Bombus ruderatus (Fabricius),Cirsium vulgare ,Bombus ruderatus (Fabricius)_Cirsium vulgare ,1,0.036,0.964
+Bombus soroeensis (Fabricius),Silene dioica,Bombus soroeensis (Fabricius)_Silene dioica,0.976,0.025,0.975
+Bombus soroeensis (Fabricius),Cirsium vulgare ,Bombus soroeensis (Fabricius)_Cirsium vulgare ,0.024,0.012,0.506
+Bombus terrestris (Linnaeus),Epilobium montanum,Bombus terrestris (Linnaeus)_Epilobium montanum,0.714,0.167,0.767
+Bombus terrestris (Linnaeus), Melilotus alba,Bombus terrestris (Linnaeus)_ Melilotus alba,0.143,0.061,0.571
+Bombus terrestris (Linnaeus),Tanacetum vulgare,Bombus terrestris (Linnaeus)_Tanacetum vulgare,0.143,0.005,0.964
+"Byturus aestivus Linnaeus, Byturidae",Myosotis palustris,"Byturus aestivus Linnaeus, Byturidae_Myosotis palustris",1,0.077,0.923
+Calliphoridae sp.,Achillea millefolium,Calliphoridae sp._Achillea millefolium,0.667,0.019,0.972
+Calliphoridae sp.,Daucus carota,Calliphoridae sp._Daucus carota,0.333,0.059,0.824
+Campus pratella,Trifolium repens,Campus pratella_Trifolium repens,0.865,0.095,0.89
+Campus pratella,Tripleurospermum inodorum,Campus pratella_Tripleurospermum inodorum,0.054,0.009,0.841
+Campus pratella,Verbascum thapsus,Campus pratella_Verbascum thapsus,0.043,0.067,0.351
+Campus pratella,Senecio jacobaea,Campus pratella_Senecio jacobaea,0.022,0.021,0.046
+Campus pratella,Vicia hirsuta,Campus pratella_Vicia hirsuta,0.011,0.077,0.859
+Campus pratella, Melilotus alba,Campus pratella_ Melilotus alba,0.005,0.02,0.735
+"Cantharidae sp., Cantharidae",Tripleurospermum inodorum,"Cantharidae sp., Cantharidae_Tripleurospermum inodorum",0.659,0.052,0.922
+"Cantharidae sp., Cantharidae",Achillea millefolium,"Cantharidae sp., Cantharidae_Achillea millefolium",0.176,0.148,0.157
+"Cantharidae sp., Cantharidae",Verbascum thapsus,"Cantharidae sp., Cantharidae_Verbascum thapsus",0.088,0.067,0.242
+"Cantharidae sp., Cantharidae",Vicia hirsuta,"Cantharidae sp., Cantharidae_Vicia hirsuta",0.044,0.154,0.714
+"Cantharidae sp., Cantharidae",Tanacetum vulgare,"Cantharidae sp., Cantharidae_Tanacetum vulgare",0.033,0.005,0.846
+Ceuthorrhynchus assimilis Paykull,Myosotis palustris,Ceuthorrhynchus assimilis Paykull_Myosotis palustris,0.444,0.154,0.654
+Ceuthorrhynchus assimilis Paykull,Senecio jacobaea,Ceuthorrhynchus assimilis Paykull_Senecio jacobaea,0.444,0.021,0.954
+Ceuthorrhynchus assimilis Paykull,Aegopodium podagraria,Ceuthorrhynchus assimilis Paykull_Aegopodium podagraria,0.111,0.143,0.222
+Ceuthorrhynchus rugulosus Herbst (?),Silene dioica,Ceuthorrhynchus rugulosus Herbst (?)_Silene dioica,1,0.025,0.975
+Cheilosia albitarsis,Ranunculus repens,Cheilosia albitarsis_Ranunculus repens,1,0.022,0.978
+Cheilosia impressa,Daucus carota,Cheilosia impressa_Daucus carota,1,0.294,0.706
+Cheilosia velutina,Chaerophyllum temulentum,Cheilosia velutina_Chaerophyllum temulentum,1,0.021,0.979
+Chloropidae sp.,Trifolium repens,Chloropidae sp._Trifolium repens,0.87,0.048,0.945
+Chloropidae sp.,Tripleurospermum inodorum,Chloropidae sp._Tripleurospermum inodorum,0.109,0.009,0.921
+Chloropidae sp.,Vicia hirsuta,Chloropidae sp._Vicia hirsuta,0.022,0.077,0.717
+Chrysogaster cemiteriorum,Chaerophyllum temulentum,Chrysogaster cemiteriorum_Chaerophyllum temulentum,1,0.063,0.938
+"Clytus arietis Linnaeus, Cerambycidae",Tripleurospermum inodorum,"Clytus arietis Linnaeus, Cerambycidae_Tripleurospermum inodorum",0.714,0.009,0.988
+"Clytus arietis Linnaeus, Cerambycidae",Verbascum thapsus,"Clytus arietis Linnaeus, Cerambycidae_Verbascum thapsus",0.286,0.033,0.883
+"Coccinella 7-punctata Linnaeus, Coccinellidae",Vicia hirsuta,"Coccinella 7-punctata Linnaeus, Coccinellidae_Vicia hirsuta",0.513,0.154,0.7
+"Coccinella 7-punctata Linnaeus, Coccinellidae",Achillea millefolium,"Coccinella 7-punctata Linnaeus, Coccinellidae_Achillea millefolium",0.256,0.019,0.928
+"Coccinella 7-punctata Linnaeus, Coccinellidae",Trifolium dubium,"Coccinella 7-punctata Linnaeus, Coccinellidae_Trifolium dubium",0.128,0.1,0.22
+"Coccinella 7-punctata Linnaeus, Coccinellidae",Echium vulgare,"Coccinella 7-punctata Linnaeus, Coccinellidae_Echium vulgare",0.103,0.095,0.071
+"Corticarina gibbosa Herbst, Lathridiidae",Echium vulgare,"Corticarina gibbosa Herbst, Lathridiidae_Echium vulgare",1,0.048,0.952
+Diptera sp.,Tanacetum vulgare,Diptera sp._Tanacetum vulgare,1,0.005,0.995
+Dolichopodidae sp.,Trifolium repens,Dolichopodidae sp._Trifolium repens,0.714,0.048,0.933
+Dolichopodidae sp.,Chaerophyllum temulentum,Dolichopodidae sp._Chaerophyllum temulentum,0.232,0.271,0.143
+Dolichopodidae sp.,Achillea millefolium,Dolichopodidae sp._Achillea millefolium,0.018,0.019,0.036
+Dolichopodidae sp.,Vicia hirsuta,Dolichopodidae sp._Vicia hirsuta,0.018,0.077,0.768
+Dolichopodidae sp.,Daucus carota,Dolichopodidae sp._Daucus carota,0.009,0.059,0.848
+Dolichopodidae sp.,Trifolium dubium,Dolichopodidae sp._Trifolium dubium,0.009,0.1,0.911
+Empididae sp.,Cirsium arvense,Empididae sp._Cirsium arvense,0.399,0.267,0.332
+Empididae sp.,Ranunculus repens,Empididae sp._Ranunculus repens,0.299,0.043,0.855
+Empididae sp.,Tripleurospermum inodorum,Empididae sp._Tripleurospermum inodorum,0.15,0.052,0.654
+Empididae sp.,Chaerophyllum temulentum,Empididae sp._Chaerophyllum temulentum,0.065,0.271,0.76
+Empididae sp.,Lapsana communis,Empididae sp._Lapsana communis,0.05,0.4,0.875
+Empididae sp.,Achillea millefolium,Empididae sp._Achillea millefolium,0.02,0.074,0.731
+Empididae sp.,Senecio jacobaea,Empididae sp._Senecio jacobaea,0.01,0.021,0.516
+Empididae sp., Malva sylvestris,Empididae sp._ Malva sylvestris,0.005,0.714,0.993
+Empididae sp.,Chrysanthemum maximum,Empididae sp._Chrysanthemum maximum,0.002,0.25,0.992
+Enicmus transversus (Olivier),Epilobium montanum,Enicmus transversus (Olivier)_Epilobium montanum,1,0.056,0.944
+Eoseristalis abusivus,Tripleurospermum inodorum,Eoseristalis abusivus_Tripleurospermum inodorum,0.588,0.017,0.971
+Eoseristalis abusivus,Achillea millefolium,Eoseristalis abusivus_Achillea millefolium,0.176,0.056,0.685
+Eoseristalis abusivus,Daucus carota,Eoseristalis abusivus_Daucus carota,0.088,0.176,0.5
+Eoseristalis abusivus,Tanacetum vulgare,Eoseristalis abusivus_Tanacetum vulgare,0.088,0.005,0.942
+Eoseristalis abusivus, Melilotus alba,Eoseristalis abusivus_ Melilotus alba,0.059,0.041,0.306
+Eoseristalis abustorum,Tripleurospermum inodorum,Eoseristalis abustorum_Tripleurospermum inodorum,1,0.009,0.991
+Episyrphus balteatus,Tripleurospermum inodorum,Episyrphus balteatus_Tripleurospermum inodorum,0.641,0.026,0.96
+Episyrphus balteatus,Senecio jacobaea,Episyrphus balteatus_Senecio jacobaea,0.171,0.041,0.759
+Episyrphus balteatus,Tanacetum vulgare,Episyrphus balteatus_Tanacetum vulgare,0.064,0.005,0.921
+Episyrphus balteatus,Chaerophyllum temulentum,Episyrphus balteatus_Chaerophyllum temulentum,0.043,0.021,0.513
+Episyrphus balteatus, Melilotus alba,Episyrphus balteatus_ Melilotus alba,0.043,0.041,0.045
+Episyrphus balteatus,Cirsium vulgare ,Episyrphus balteatus_Cirsium vulgare ,0.038,0.036,0.06
+"Epuraea depressa Illiger, Nitidulidae",Cirsium arvense,"Epuraea depressa Illiger, Nitidulidae_Cirsium arvense",1,0.033,0.967
+Eristalinus spulchralis,Tripleurospermum inodorum,Eristalinus spulchralis_Tripleurospermum inodorum,1,0.009,0.991
+Eumerus tuberculatus,Silene dioica,Eumerus tuberculatus_Silene dioica,0.533,0.049,0.907
+Eumerus tuberculatus,Epilobium montanum,Eumerus tuberculatus_Epilobium montanum,0.333,0.333,0
+Eumerus tuberculatus,Tripleurospermum inodorum,Eumerus tuberculatus_Tripleurospermum inodorum,0.111,0.009,0.922
+Eumerus tuberculatus,Chamomilla recutita,Eumerus tuberculatus_Chamomilla recutita,0.022,0.037,0.4
+Heleomyzidae sp.,Tripleurospermum inodorum,Heleomyzidae sp._Tripleurospermum inodorum,0.909,0.009,0.991
+Heleomyzidae sp.,Aegopodium podagraria,Heleomyzidae sp._Aegopodium podagraria,0.091,0.143,0.364
+Lauxaniidae sp.,Trifolium repens,Lauxaniidae sp._Trifolium repens,0.741,0.095,0.871
+Lauxaniidae sp.,Chamomilla recutita,Lauxaniidae sp._Chamomilla recutita,0.111,0.444,0.75
+Lauxaniidae sp.,Silene dioica,Lauxaniidae sp._Silene dioica,0.111,0.025,0.778
+Lauxaniidae sp.,Verbascum thapsus,Lauxaniidae sp._Verbascum thapsus,0.019,0.033,0.444
+Lauxaniidae sp.,Myosotis palustris,Lauxaniidae sp._Myosotis palustris,0.009,0.077,0.88
+Lauxaniidae sp.,Vicia hirsuta,Lauxaniidae sp._Vicia hirsuta,0.009,0.077,0.88
+Leptura rubra Linnaeus,Tripleurospermum inodorum,Leptura rubra Linnaeus_Tripleurospermum inodorum,0.704,0.069,0.902
+Leptura rubra Linnaeus,Achillea millefolium,Leptura rubra Linnaeus_Achillea millefolium,0.229,0.241,0.049
+Leptura rubra Linnaeus,Tanacetum vulgare,Leptura rubra Linnaeus_Tanacetum vulgare,0.053,0.01,0.808
+Leptura rubra Linnaeus,Daucus carota,Leptura rubra Linnaeus_Daucus carota,0.009,0.059,0.85
+Leptura rubra Linnaeus,Cirsium vulgare ,Leptura rubra Linnaeus_Cirsium vulgare ,0.005,0.012,0.562
+"Malachius viridis Fabricius, Malachiidae",Trifolium repens,"Malachius viridis Fabricius, Malachiidae_Trifolium repens",1,0.048,0.952
+Maniola jurtina,Silene dioica,Maniola jurtina_Silene dioica,0.403,0.086,0.785
+Maniola jurtina,Trifolium repens,Maniola jurtina_Trifolium repens,0.384,0.048,0.876
+Maniola jurtina,Cirsium arvense,Maniola jurtina_Cirsium arvense,0.096,0.033,0.652
+Maniola jurtina,Tripleurospermum inodorum,Maniola jurtina_Tripleurospermum inodorum,0.096,0.017,0.82
+Maniola jurtina,Verbascum thapsus,Maniola jurtina_Verbascum thapsus,0.019,0.033,0.425
+Maniola jurtina,Cirsium vulgare ,Maniola jurtina_Cirsium vulgare ,0.003,0.012,0.761
+Melanostoma scalare,Aegopodium podagraria,Melanostoma scalare_Aegopodium podagraria,1,0.143,0.857
+Meligethes spp.,Ranunculus repens,Meligethes spp._Ranunculus repens,0.628,0.826,0.239
+Meligethes spp.,Tanacetum vulgare,Meligethes spp._Tanacetum vulgare,0.137,0.843,0.837
+Meligethes spp.,Tripleurospermum inodorum,Meligethes spp._Tripleurospermum inodorum,0.105,0.328,0.68
+Meligethes spp.,Cirsium arvense,Meligethes spp._Cirsium arvense,0.05,0.3,0.835
+Meligethes spp.,Senecio jacobaea,Meligethes spp._Senecio jacobaea,0.029,0.536,0.947
+Meligethes spp.,Trifolium repens,Meligethes spp._Trifolium repens,0.022,0.048,0.537
+Meligethes spp.,Chaerophyllum temulentum,Meligethes spp._Chaerophyllum temulentum,0.007,0.271,0.974
+Meligethes spp.,Cirsium vulgare ,Meligethes spp._Cirsium vulgare ,0.007,0.518,0.986
+Meligethes spp.,Achillea millefolium,Meligethes spp._Achillea millefolium,0.003,0.111,0.97
+Meligethes spp.,Silene dioica,Meligethes spp._Silene dioica,0.003,0.012,0.732
+Meligethes spp.,Verbascum thapsus,Meligethes spp._Verbascum thapsus,0.003,0.1,0.967
+Meligethes spp.,Daucus carota,Meligethes spp._Daucus carota,0.002,0.353,0.995
+Meligethes spp.,Lapsana communis,Meligethes spp._Lapsana communis,0.001,0.08,0.986
+Meligethes spp.,Hypericum perforatum,Meligethes spp._Hypericum perforatum,0.001,1,0.999
+Meligethes spp., Melilotus alba,Meligethes spp._ Melilotus alba,0.001,0.041,0.986
+Meligethes spp.,Stachys sylvatica,Meligethes spp._Stachys sylvatica,0.001,0.143,0.996
+Meligethes spp.,Aegopodium podagraria,Meligethes spp._Aegopodium podagraria,0,0.143,0.998
+Meligethes spp.,Echium vulgare,Meligethes spp._Echium vulgare,0,0.095,0.998
+Meliscaeva cintella,Trifolium repens,Meliscaeva cintella_Trifolium repens,0.792,0.048,0.94
+Meliscaeva cintella,Tanacetum vulgare,Meliscaeva cintella_Tanacetum vulgare,0.089,0.015,0.829
+Meliscaeva cintella,Prunella vulgaris,Meliscaeva cintella_Prunella vulgaris,0.079,0.286,0.723
+Meliscaeva cintella,Lapsana communis,Meliscaeva cintella_Lapsana communis,0.04,0.08,0.505
+Miarus campanulae Linnaeus,Tripleurospermum inodorum,Miarus campanulae Linnaeus_Tripleurospermum inodorum,1,0.009,0.991
+Miccotrogus picirostris Fabricius,Ranunculus repens,Miccotrogus picirostris Fabricius_Ranunculus repens,1,0.022,0.978
+Muscidae sp.,Cirsium arvense,Muscidae sp._Cirsium arvense,0.87,0.033,0.962
+Muscidae sp.,Senecio jacobaea,Muscidae sp._Senecio jacobaea,0.087,0.01,0.881
+Muscidae sp., Melilotus alba,Muscidae sp._ Melilotus alba,0.043,0.02,0.531
+Nemophora degrella,Silene dioica,Nemophora degrella_Silene dioica,0.857,0.025,0.971
+Nemophora degrella,Myosotis palustris,Nemophora degrella_Myosotis palustris,0.143,0.154,0.071
+"Olibrus aeneus Fabricius, Phalacridae",Silene dioica,"Olibrus aeneus Fabricius, Phalacridae_Silene dioica",0.847,0.642,0.242
+"Olibrus aeneus Fabricius, Phalacridae",Senecio jacobaea,"Olibrus aeneus Fabricius, Phalacridae_Senecio jacobaea",0.049,0.186,0.737
+"Olibrus aeneus Fabricius, Phalacridae",Verbascum thapsus,"Olibrus aeneus Fabricius, Phalacridae_Verbascum thapsus",0.038,0.233,0.837
+"Olibrus aeneus Fabricius, Phalacridae",Chamomilla recutita,"Olibrus aeneus Fabricius, Phalacridae_Chamomilla recutita",0.033,0.444,0.927
+"Olibrus aeneus Fabricius, Phalacridae",Tripleurospermum inodorum,"Olibrus aeneus Fabricius, Phalacridae_Tripleurospermum inodorum",0.027,0.017,0.365
+"Olibrus aeneus Fabricius, Phalacridae",Tanacetum vulgare,"Olibrus aeneus Fabricius, Phalacridae_Tanacetum vulgare",0.004,0.005,0.198
+"Olibrus aeneus Fabricius, Phalacridae",Myosotis palustris,"Olibrus aeneus Fabricius, Phalacridae_Myosotis palustris",0.003,0.077,0.965
+Opomyzidae sp.,Cirsium arvense,Opomyzidae sp._Cirsium arvense,0.476,0.033,0.93
+Opomyzidae sp.,Silene dioica,Opomyzidae sp._Silene dioica,0.286,0.012,0.957
+Opomyzidae sp.,Lapsana communis,Opomyzidae sp._Lapsana communis,0.095,0.08,0.16
+Opomyzidae sp.,Verbascum thapsus,Opomyzidae sp._Verbascum thapsus,0.095,0.033,0.65
+Opomyzidae sp.,Senecio jacobaea,Opomyzidae sp._Senecio jacobaea,0.048,0.01,0.784
+Oulema melanopus (Linnaeus),Senecio jacobaea,Oulema melanopus (Linnaeus)_Senecio jacobaea,0.5,0.01,0.979
+Oulema melanopus (Linnaeus),Vicia hirsuta,Oulema melanopus (Linnaeus)_Vicia hirsuta,0.5,0.077,0.846
+Parasyrphus malinellus,Tanacetum vulgare,Parasyrphus malinellus_Tanacetum vulgare,1,0.005,0.995
+Pieris napi,Senecio jacobaea,Pieris napi_Senecio jacobaea,0.583,0.072,0.876
+Pieris napi,Tripleurospermum inodorum,Pieris napi_Tripleurospermum inodorum,0.417,0.009,0.979
+"Polyommatus icarus, Lycaenidae",Trifolium repens,"Polyommatus icarus, Lycaenidae_Trifolium repens",0.842,0.143,0.83
+"Polyommatus icarus, Lycaenidae",Tripleurospermum inodorum,"Polyommatus icarus, Lycaenidae_Tripleurospermum inodorum",0.105,0.026,0.754
+"Polyommatus icarus, Lycaenidae",Tanacetum vulgare,"Polyommatus icarus, Lycaenidae_Tanacetum vulgare",0.032,0.015,0.518
+"Polyommatus icarus, Lycaenidae",Achillea millefolium,"Polyommatus icarus, Lycaenidae_Achillea millefolium",0.007,0.019,0.621
+"Polyommatus icarus, Lycaenidae", Melilotus alba,"Polyommatus icarus, Lycaenidae_ Melilotus alba",0.007,0.041,0.828
+"Polyommatus icarus, Lycaenidae",Vicia hirsuta,"Polyommatus icarus, Lycaenidae_Vicia hirsuta",0.007,0.077,0.909
+Psilidae sp.,Cirsium vulgare ,Psilidae sp._Cirsium vulgare ,1,0.012,0.988
+Psithyrus campestris (Panzer),Senecio jacobaea,Psithyrus campestris (Panzer)_Senecio jacobaea,0.769,0.01,0.987
+Psithyrus campestris (Panzer),Cirsium vulgare ,Psithyrus campestris (Panzer)_Cirsium vulgare ,0.231,0.012,0.948
+Psithyrus rupestris (Fabricius),Cirsium vulgare ,Psithyrus rupestris (Fabricius)_Cirsium vulgare ,1,0.036,0.964
+Ptychopteridae sp.,Vicia hirsuta,Ptychopteridae sp._Vicia hirsuta,1,0.077,0.923
+Scatopsidae sp.,Chaerophyllum temulentum,Scatopsidae sp._Chaerophyllum temulentum,0.5,0.021,0.958
+Scatopsidae sp.,Senecio jacobaea,Scatopsidae sp._Senecio jacobaea,0.5,0.01,0.979
+Sciaridae sp.,Tripleurospermum inodorum,Sciaridae sp._Tripleurospermum inodorum,1,0.009,0.991
+Sepsidae sp.,Tripleurospermum inodorum,Sepsidae sp._Tripleurospermum inodorum,0.714,0.026,0.964
+Sepsidae sp.,Silene dioica,Sepsidae sp._Silene dioica,0.286,0.012,0.957
+Simuliidae sp.,Aegopodium podagraria,Simuliidae sp._Aegopodium podagraria,1,0.143,0.857
+Sitona lineatus Linnaeus, Melilotus alba,Sitona lineatus Linnaeus_ Melilotus alba,1,0.061,0.939
+Sphaerophoria menthastri,Lapsana communis,Sphaerophoria menthastri_Lapsana communis,0.455,0.2,0.56
+Sphaerophoria menthastri,Tripleurospermum inodorum,Sphaerophoria menthastri_Tripleurospermum inodorum,0.455,0.009,0.981
+Sphaerophoria menthastri,Achillea millefolium,Sphaerophoria menthastri_Achillea millefolium,0.091,0.019,0.796
+Sphaerophoria scripta,Tripleurospermum inodorum,Sphaerophoria scripta_Tripleurospermum inodorum,0.87,0.017,0.98
+Sphaerophoria scripta,Tanacetum vulgare,Sphaerophoria scripta_Tanacetum vulgare,0.13,0.005,0.961
+Sphaerophoria taemata,Trifolium repens,Sphaerophoria taemata_Trifolium repens,1,0.048,0.952
+Strangalia maculata Poda,Tripleurospermum inodorum,Strangalia maculata Poda_Tripleurospermum inodorum,1,0.009,0.991
+Stratiomyidae sp.,Tripleurospermum inodorum,Stratiomyidae sp._Tripleurospermum inodorum,0.439,0.009,0.98
+Stratiomyidae sp.,Lapsana communis,Stratiomyidae sp._Lapsana communis,0.175,0.08,0.544
+Stratiomyidae sp.,Verbascum thapsus,Stratiomyidae sp._Verbascum thapsus,0.175,0.033,0.81
+Stratiomyidae sp.,Achillea millefolium,Stratiomyidae sp._Achillea millefolium,0.088,0.019,0.789
+Stratiomyidae sp.,Chaerophyllum temulentum,Stratiomyidae sp._Chaerophyllum temulentum,0.088,0.021,0.763
+Stratiomyidae sp.,Echium vulgare,Stratiomyidae sp._Echium vulgare,0.035,0.095,0.632
+Strophosomus capitatus de Geer,Myosotis palustris,Strophosomus capitatus de Geer_Myosotis palustris,1,0.231,0.769
+Syrphidae sp.,Achillea millefolium,Syrphidae sp._Achillea millefolium,1,0.13,0.87
+Syrphus ribesii,Ranunculus repens,Syrphus ribesii_Ranunculus repens,0.882,0.022,0.975
+Syrphus ribesii,Epilobium montanum,Syrphus ribesii_Epilobium montanum,0.074,0.056,0.244
+Syrphus ribesii,Tanacetum vulgare,Syrphus ribesii_Tanacetum vulgare,0.044,0.005,0.885
+Tachinidae sp.,Tripleurospermum inodorum,Tachinidae sp._Tripleurospermum inodorum,0.449,0.06,0.866
+Tachinidae sp.,Cirsium arvense,Tachinidae sp._Cirsium arvense,0.385,0.1,0.74
+Tachinidae sp.,Achillea millefolium,Tachinidae sp._Achillea millefolium,0.077,0.111,0.308
+Tachinidae sp., Cerastium glomeratum,Tachinidae sp._ Cerastium glomeratum,0.064,1,0.936
+Tachinidae sp., Melilotus alba,Tachinidae sp._ Melilotus alba,0.013,0.041,0.686
+Tachinidae sp.,Geranium robertianum L.,Tachinidae sp._Geranium robertianum L.,0.006,1,0.994
+Tachinidae sp.,Trifolium dubium,Tachinidae sp._Trifolium dubium,0.006,0.1,0.936
+Tanypezidae sp.,Verbascum thapsus,Tanypezidae sp._Verbascum thapsus,0.46,0.067,0.855
+Tanypezidae sp.,Epilobium montanum,Tanypezidae sp._Epilobium montanum,0.287,0.056,0.807
+Tanypezidae sp.,Chrysanthemum maximum,Tanypezidae sp._Chrysanthemum maximum,0.138,0.75,0.816
+Tanypezidae sp.,Myosotis palustris,Tanypezidae sp._Myosotis palustris,0.115,0.077,0.331
+Tephritidae sp.,Tripleurospermum inodorum,Tephritidae sp._Tripleurospermum inodorum,0.649,0.009,0.987
+Tephritidae sp., Melilotus alba,Tephritidae sp._ Melilotus alba,0.195,0.061,0.686
+Tephritidae sp.,Myosotis palustris,Tephritidae sp._Myosotis palustris,0.13,0.077,0.408
+Tephritidae sp.,Echium vulgare,Tephritidae sp._Echium vulgare,0.026,0.048,0.455
+"Thymelicus sylvestris, Hesperiidae",Tanacetum vulgare,"Thymelicus sylvestris, Hesperiidae_Tanacetum vulgare",0.6,0.005,0.992
+"Thymelicus sylvestris, Hesperiidae",Vicia hirsuta,"Thymelicus sylvestris, Hesperiidae_Vicia hirsuta",0.4,0.077,0.808
+Tipulidae sp.,Trifolium repens,Tipulidae sp._Trifolium repens,1,0.048,0.952
+"Zygaena filipendulae, Zygaenidae",Cirsium arvense,"Zygaena filipendulae, Zygaenidae_Cirsium arvense",1,0.033,0.967
